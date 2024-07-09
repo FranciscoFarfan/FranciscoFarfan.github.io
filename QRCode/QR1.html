@@ -9,41 +9,39 @@
     <div id="result"></div>
     <h1>Escanear QR</h1>
     <div style="display: flex; justify-content: center;">
-        <div id="reader" style="width:500px;">
-
-        </div>
+        <div id="reader" style="width:500px;"></div>
     </div>
 
-    <script src="https://unpkg.com/html5-qrcode" ></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
 
     <script>
-        function domReady(fn){
-            if(document.readyState === "complete" || document.readyState === "interactive"  ){
-                setTimeout(fn,1);
-            }else{
-                document.addEventListener("DOMConentLoaded",fn);
+        function domReady(fn) {
+            if (document.readyState === "complete" || document.readyState === "interactive") {
+                setTimeout(fn, 1);
+            } else {
+                document.addEventListener("DOMContentLoaded", fn);
             }
-        }   
+        }
 
-        domReady(function(){
-            var myqr=document.getElementById('result');
-            var lastResult,countResults=0;
+        domReady(function () {
+            var myqr = document.getElementById('result');
+            var lastResult, countResults = 0;
 
-            function onScannSucces(decodeText,decodeResult){
-                if(decodeTect !== lastResult){
+            function onScanSuccess(decodedText, decodedResult) {
+                if (decodedText !== lastResult) {
                     ++countResults;
-                    lastResult =decodeText;
+                    lastResult = decodedText;
 
-                    alert("You QR is: " + decodeText,decodeResult)
-                    myqr.innetHTML = 'you scan ${countResults} : ${decodeText}'
+                    alert("Your QR is: " + decodedText, decodedResult);
+                    myqr.innerHTML = `You scan ${countResults}: ${decodedText}`;
                 }
             }
-            var gtmlscanner = new Html5QrcodeScanner(
-                "reader",{fps:10,qrbox:250})
 
-            htmlscaner.render(onScannSucces);
-        
-        })
+            var html5QrCodeScanner = new Html5QrcodeScanner(
+                "reader", { fps: 10, qrbox: 250 });
+
+            html5QrCodeScanner.render(onScanSuccess);
+        });
     </script>
 </body>
 </html>
