@@ -9,12 +9,12 @@ function onScanFailure(error) {
     console.warn(`Error de escaneo: ${error}`);
 }
 
-let html5QrCode = new Html5Qrcode("qr-reader");
+let html5QrCode = new html5Qrcode("qr-reader");
 
 const config = { fps: 10, qrbox: 250 };
 
 // Inicia el escaneo de la cámara
-Html5Qrcode.getCameras().then(devices => {
+html5QrCode.getCameras().then(devices => {
     if (devices && devices.length) {
         let cameraId = devices[0].id;
         html5QrCode.start(
