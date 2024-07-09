@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="result"></div>
+    <h1>Escanear QR</h1>
+    <div style="display: flex; justify-content: center;">
+        <div id="reader" style="width:500px;">
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/html5-qrcode" ></script>
+
+    <script>
+        function domReady(fn){
+            if(document.readyState === "complete" || document.readyState === "interactive"  ){
+                setTimeout(fn,1);
+            }else{
+                document.addEventListener("DOMConentLoaded",fn);
+            }
+        }   
+
+        domReady(function(){
+            var myqr=document.getElementById('result');
+            var lastResult,countResults=0;
+
+            function onScannSucces(decodeText,decodeResult){
+                if(decodeTect !== lastResult){
+                    ++countResults;
+                    lastResult =decodeText;
+
+                    alert("You QR is: " + decodeText,decodeResult)
+                    myqr.innetHTML = 'you scan ${countResults} : ${decodeText}'
+                }
+            }
+            var gtmlscanner = new Html5QrcodeScanner(
+                "reader",{fps:10,qrbox:250})
+
+            htmlscaner.render(onScannSucces);
+        
+        })
+    </script>
+</body>
+</html>
