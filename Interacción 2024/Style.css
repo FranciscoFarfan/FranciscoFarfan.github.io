@@ -1,0 +1,500 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: rgb(37, 37, 37);
+    overflow-y:hidden ;
+}
+#miLabel {
+    display: inline-block;
+    
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Estilos específicos para el select con el id "miSelect" */
+#miSelect {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    background-color: #f1f1f1;
+    color: #333;
+    
+}
+
+#miSelect:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Estilos generales del header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 100;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header .logo {
+    height: 40px;
+    object-fit: contain;
+}
+
+.header .usuario {
+    display: flex;
+    align-items: center;
+}
+
+.header .usuario img {
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+.hamburger{
+    display: none;
+	position:fixed;
+    background-color:transparent;
+	left:0;
+	top:0;
+	height:30px;
+	width:30px;
+	padding:20px 20px;
+	-webkit-transform:translate3d(0, 0, 0);
+	transform:translate3d(0, 0, 0);
+	-webkit-transition:-webkit-transform 0.25s cubic-bezier(0.05, 1.04, 0.72, 0.98);
+	transition:transform 0.25s cubic-bezier(0.05, 1.04, 0.72, 0.98);
+	z-index:1002;
+	cursor:pointer;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none
+}
+.task-btn{
+    display: none;
+}
+.hamburger.is-active{
+  background-color:none;
+}
+._layer{
+	background:#333333;
+	margin-bottom:4px;
+	border-radius:2px;
+	width:28px;
+	height:4px;
+	opacity:1;
+	-webkit-transform:translate3d(0, 0, 0);
+	transform:translate3d(0, 0, 0);
+	-webkit-transition:all 0.25s cubic-bezier(0.05, 1.04, 0.72, 0.98);
+	transition:all 0.25s cubic-bezier(0.05, 1.04, 0.72, 0.98);
+}
+.hamburger:hover .-top{
+	-webkit-transform:translateY(-100%);
+	-ms-transform:translateY(-100%);
+	transform:translateY(-100%);
+}
+.hamburger:hover .-bottom{
+	-webkit-transform:translateY(50%);
+	-ms-transform:translateY(100%);
+	transform:translateY(100%);
+	}
+.hamburger.is-active .-top{
+	-webkit-transform:translateY(200%) rotate(45deg) !important;
+	-ms-transform:translateY(200%) rotate(45deg) !important;
+	transform:translateY(200%) rotate(45deg) !important;
+}
+.hamburger.is-active .-mid{
+	opacity:0;
+}
+.hamburger.is-active .-bottom{
+	-webkit-transform:translateY(-200%) rotate(135deg) !important;
+	-ms-transform:translateY(-200%) rotate(135deg) !important;
+	transform:translateY(-200%) rotate(135deg) !important;
+}
+
+.menuppal.is_active{
+  transform: translate3d(0px, 0px, 0px);
+}
+.menuppal{
+   background-color: rgba(255, 255, 255, 0.95);
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    transform: translate3d(0px, -100%, 0px);
+    transition: transform 0.35s cubic-bezier(0.05, 1.04, 0.72, 0.98) 0s;
+    width: 100%;
+    z-index: 1001;
+}
+.menuppal ul{
+  margin:0;padding:0;
+}
+.menuppal ul li { 
+  list-style: none;
+	text-align:center;
+	font-family: Verdadna, Arial, Helvetica;
+	color:$nav-color-text;
+	font-size:1.5rem;
+	line-height:3em;
+	height:3em;
+  color:#369;
+	text-transform:none;
+	font-weight:bold;
+}
+.menuppal ul li a{
+  text-decoration:none;
+  color:#369;
+}
+.menuppal ul li a:hover{
+  text-decoration:none;
+  color:#333;
+}
+
+/* Container general debajo del header */
+.container {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 60px); /* Resta la altura del header */
+    margin-top: 60px; /* Empuja el contenido debajo del header */
+}
+
+/* Barra izquierda: Grupos y Compañeros */
+.sidebar {
+    width: 20%;
+    box-sizing: border-box;
+    display: block;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ddd;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background-color: #ccc;
+}
+
+/* Bloque de grupos */
+.groups {
+    height: 45%;
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: block;
+}
+
+.scrollable {
+    height: 75%;
+    overflow: scroll;
+}
+
+.add {
+    margin-top: 15px;
+    margin-bottom: 2px;
+}
+
+.add button {
+    text-decoration: underline;
+    color: white;
+    background-color: #007bff;
+}
+
+.add button:hover {
+    background-color: #0056b3;
+}
+
+/* Área central: publicaciones */
+.feed {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card h4 {
+    margin: 0;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 6px;
+    height: auto;
+    margin: 10px 0;
+}
+#miCalendario {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    background-color: #f1f1f1;
+    color: #333;
+    font-size: 1em;
+    margin-top: -5px;
+    margin-bottom: 50px;
+}
+#miBusqueda {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    background-color: #f1f1f1;
+    color: #333;
+    font-size: 1em;
+    margin-top: -20px;
+}
+
+#miBusqueda:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+.cartas-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: space-around;
+}
+
+/* Estilos para cada carta */
+.carta {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carta h3 {
+    margin-top: 0;
+}
+
+.carta ul {
+    padding-left: 20px;
+}
+
+.carta li {
+    margin-bottom: 5px;
+}
+
+.separador {
+    border: none; /* Elimina el estilo predeterminado */
+    border-top: 2px solid #007bff; /* Línea de separación */
+    margin: 20px 0; /* Espacio superior e inferior */
+    width: 100%; /* Se ajusta al ancho del contenedor */
+}
+
+#miCalendario:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+/* Estilos específicos para el textarea con el id "miTextarea" */
+#miTextarea {
+    width: 98%; 
+    max-width: 98%; 
+    min-width: 50%; 
+    height: 100px; 
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    background-color: #f1f1f1;
+    color: #333;
+    font-size: 1em;
+    resize: horizontal; /* Permite cambiar el tamaño horizontalmente */
+    margin-top: 10px;
+}
+
+#miTextarea:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+
+
+.card p {
+    margin: 10px 0;
+}
+
+.adj-files {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 2px;
+    padding-left: 10px;
+}
+.adj-files1 {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 2px;
+   
+}
+
+.files {
+    background-color: #ffffff;
+    padding: 10px;
+    padding-bottom: 50px;
+    margin: 10px;
+    border: 1px solid #ddd;
+}
+.files1 {
+    background-color: #ffffff;
+    padding: 10px;
+    padding-bottom: 35px;
+    margin: 3px;
+    border: 0.5px solid #ddd;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    background-color: #0056b3;
+}
+
+/* Barra derecha: Tareas */
+.tasks-sidebar {
+    width: 20%;
+    background-color: #f1f1f1;
+    box-sizing: border-box;
+    margin: 10px;
+    margin-left: 0px;
+    padding: 10px;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.tasks-sidebar h3 {
+    margin-top: 0;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.task input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.calendar {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: white;
+}
+
+
+
+@media screen and (max-width: 950px) {
+    .sidebar {
+        display: none; 
+    }
+
+    .hamburger{
+        display: block;
+    }
+
+    .header h1 {
+        margin-left: 100px;
+    }
+
+    .feed {
+        width: 80%; /* La sección de publicaciones ocupará todo el ancho */
+    }
+
+    .logo{
+        display:none;
+    }
+}
+
+
+
+@media screen and (max-width: 700px) {
+
+    .tasks-sidebar{
+        display: none; 
+    }
+
+
+    .feed {
+        width: 100%; /* La sección de publicaciones ocupará todo el ancho */
+    }
+
+    .task-btn{
+        display: block;
+    }
+}
+
+
+

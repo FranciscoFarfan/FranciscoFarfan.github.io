@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syncademic</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="js" href="js.js">
+</head>
+<body>
+    <div class="header">
+        <img src="img/logo.png" alt="Logo de Syncademic" class="logo">
+
+        <div class="hamburger">
+            <div class="_layer -top"></div>
+            <div class="_layer -mid"></div>
+            <div class="_layer -bottom"></div>
+        </div>
+        <nav class="menuppal">
+            <ul>
+              <li><a href="#">Grupos</a></li>
+              <li><a href="#">Compañeros</a></li>
+              <li><a href="#" class="task-btn">Tareas</a></li>
+            </ul>
+        </nav>
+
+        <h1>Syncademic</h1>
+        <div class="usuario">
+            <img src="img/usuario.png" alt="Imagen de usuario">
+            <h3>Usuario</h3>
+        </div>
+    </div>
+    <script>
+        var menu = document.querySelector('.hamburger');
+
+        function toggleMenu (event) {
+        this.classList.toggle('is-active');
+        document.querySelector( ".menuppal" ).classList.toggle("is_active");
+        event.preventDefault();
+        }
+
+        menu.addEventListener('click', toggleMenu, false);
+    </script>
+
+
+    <div class="container">
+        <!-- Barra izquierda: Grupos y Compañeros -->
+        <div class="sidebar">
+            <div class="groups">
+                <h3>Grupos</h3>
+                <div class="scrollable">
+                    <button>Inglés 3</button>
+                    <button>Matemáticas 3</button>
+                    <button>Núcleo V</button>
+                </div>
+                <div class="add">
+                    <button>Entrar a nuevo grupo</button>
+                </div>
+            </div>
+
+            <div class="groups">
+                <h3>Compañeros</h3>
+                <div class="scrollable">
+                    <button>Víctor Zamarrón</button>
+                    <button>Coral Domínguez</button>
+                    <button>César Rodríguez</button>
+                    <button>Víctor Zamarrón</button>
+                    <button>Coral Domínguez</button>
+                    <button>César Rodríguez</button>
+                </div>
+                <div class="add">
+                    <button>Buscar compañeros</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área central: Publicaciones -->
+        <div class="feed">
+            <div class="card">
+                <h4>Publicado por: Víctor Zamarrón</h4>
+                <p>Grupo: Inglés 3</p>
+                <img src="img/Tarea1.jfif" alt="Imagen de ejemplo" class="card-image">
+                <div class="adj-files">
+                    <h4>Archivos adjuntos</h4>
+                    <div class="files">archivo1</div>
+                </div>
+                <p>Descripción de la publicación o tarea. Aquí puede ir cualquier texto adicional que describa la publicación.</p>
+                <div class="actions">
+                    <button>Comentar</button>
+                    <button>Agregar a mis tareas</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>Publicado por: Coral Domínguez</h4>
+                <p>Grupo: Matemáticas 3</p>
+                <img src="img/Tarea1.jfif" alt="Imagen de ejemplo" class="card-image">
+                <div class="adj-files">
+                    <h4>Archivos adjuntos</h4>
+                    <div class="files">archivo1</div>
+                </div>
+                <p>Descripción de la publicación o tarea. Aquí puede ir cualquier texto adicional que describa la publicación.</p>
+                <div class="actions">
+                    <button>Comentar</button>
+                    <button>Agregar a mis tareas</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>Publicado por: Víctor Zamarrón</h4>
+                <p>Grupo: Inglés 3</p>
+                <img src="img/Tarea1.jfif" alt="Imagen de ejemplo" class="card-image">
+                <div class="adj-files">
+                    <h4>Archivos adjuntos</h4>
+                    <div class="files">archivo1</div>
+                </div>
+                <p>Descripción de la publicación o tarea. Aquí puede ir cualquier texto adicional que describa la publicación.</p>
+                <div class="actions">
+                    <button>Comentar</button>
+                    <button>Agregar a mis tareas</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra derecha: Tareas -->
+        <div class="tasks-sidebar">
+            <h3>Tareas</h3>
+            <div class="task">
+                <input type="checkbox" id="tarea1">
+                <label for="tarea1">Tarea 1</label>
+            </div>
+            <div class="task">
+                <input type="checkbox" id="tarea2">
+                <label for="tarea2">Tarea 2</label>
+            </div>
+            <div class="task">
+                <input type="checkbox" id="tarea3">
+                <label for="tarea3">Tarea 3</label>
+            </div>
+            <div class="calendar">
+                <p>Calendario</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
