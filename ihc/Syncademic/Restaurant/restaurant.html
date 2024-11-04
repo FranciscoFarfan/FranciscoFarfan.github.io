@@ -1,94 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
-<!DOCTYPE html>
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cantina Chichilo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f5ef; /* Color de fondo suave */
-            color: #333; /* Color de texto oscuro */
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f7f4;
+            color: #333;
             margin: 0;
             padding: 0;
         }
         header, footer {
-            background-color: #b22222; /* Rojo oscuro */
-            color: #000;
+            background-color: #2a9d8f;
+            color: #fff;
             text-align: center;
-            padding: 10px 0;
+            padding: 15px 0;
         }
         .container {
-            width: 80%;
+            width: 85%;
             margin: 0 auto;
         }
         h1, h2 {
-            color: #8B4513; /* Marrón oscuro */
+            color: #264653;
         }
-        .menu-item {
-            margin: 20px 0;
-        }
-        img {
-            border: 2px solid #8B4513; /* Bordes marrones */
+        .carousel-item img {
+            border-radius: 10px;
             width: 100%;
-            height: auto;
-            max-width: 400px;
-            display: block;
-            margin: 0 auto;
+            max-height: 500px;
+            object-fit: cover;
         }
-.negro{
- color:white;
-}
-        .center {
-            text-align: center;
-        }
-        .contact-info, .specials {
-            margin: 20px 0;
-        }
-        .marquee {
-            background-color: #8B4513; /* Marrón oscuro */
-            color: #FFFFFF;
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
-            font-size: 18px;
+            border-radius: 5px;
+        }
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-weight: 700;
+        }
+        .contact-info, .hours, .reviews {
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #e9ecef;
+        }
+        .contact-info p, .hours p, .reviews p {
+            margin: 5px 0;
+        }
+        .map {
+            height: 300px;
+            width: 100%;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 class="negro">Cantina Chichilo</h1>
-    <h2 class="negro">La elegida por Pol-Ka para las mejores producciones</h2>
+    <h1>Cantina Chichilo</h1>
+    <h2>El sabor de Buenos Aires</h2>
 </header>
 
 <div class="container">
-    <div class="menu-item">
-        <h2>Nuestros Platos</h2>
-        <img src="http://www.cantinachichilo.com.ar/agustin.jpg" alt="Plato delicioso">
-        <img src="http://www.cantinachichilo.com.ar/IMG_20241027_125743.jpg" alt="Cliente comiendo caracoles">
+    <!-- Carrusel de Platos -->
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="http://www.cantinachichilo.com.ar/IMG_20241027_125743.jpg" alt="Mondongo a la Italiana">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Mondongo a la Italiana</h5>
+                    <p>Un clásico para los amantes de la cocina tradicional.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="http://www.cantinachichilo.com.ar/DSC00731_small1.JPG" alt="Caracoles a la Bordaleza">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Caracoles a la Bordaleza</h5>
+                    <p>Sabor y tradición en cada bocado.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="http://www.cantinachichilo.com.ar/IMG_20171126_162849_089.jpg" alt="Picada Italiana">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Picada Italiana</h5>
+                    <p>Perfecta para compartir y disfrutar.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
     </div>
 
-    <div class="menu-item">
-        <h2>Nuestra Picada</h2>
-        <img src="http://www.cantinachichilo.com.ar/DSC00731_small1.JPG" alt="Caracoles a la bordaleza">
-        <img src="http://www.cantinachichilo.com.ar/IMG_20190113_213622_185.jpg" alt="Nuestra picada">
-        <img src="http://www.cantinachichilo.com.ar/IMG_20171126_162849_089.jpg" alt="Mostrador con la picada italiana">
-        <img src="http://www.cantinachichilo.com.ar/50_ANOS_small1.jpg" alt="Mostrador picada italiana">
+    <!-- Horarios -->
+    <div class="hours text-center">
+        <h2 class="section-title">Horarios</h2>
+        <p>Jueves a Sábado: 18:00 - 00:00</p>
+        <p>Sábados y Domingos: Almuerzos desde las 12:00</p>
     </div>
 
-    <div class="specials center">
-        <h2>Especialidades</h2>
-        <div class="marquee">MONDONGO A LA ITALIANA</div>
-        <div class="marquee">*RABAS A LA CALABRIA*</div>
-        <div class="marquee">*FUSILES CON BROCOLIS, ANCHOAS, GARBANZOS Y HONGOS*</div>
-        <div class="marquee">*CARACOLES A LA BORDALEZA*</div>
-        <div class="marquee">POSTRE CHICHOLINA</div>
-        <div class="marquee">TIRAMISU CALABRES</div>
+    <!-- Opiniones -->
+    <div class="reviews">
+        <h2 class="section-title">Opiniones de Clientes</h2>
+        <p>"¡Increíble comida y ambiente! El mejor lugar para disfrutar de platos tradicionales." - Juan P.</p>
+        <p>"La picada italiana es perfecta para compartir. Volveré sin duda." - María G.</p>
+        <p>"¡El mondongo a la italiana es delicioso! Excelente servicio y atención." - Roberto S.</p>
     </div>
 
-    <div class="contact-info center">
-        <h2>Información de Contacto</h2>
+    <!-- Información de Contacto -->
+    <div class="contact-info text-center">
+        <h2 class="section-title">Información de Contacto</h2>
         <p>Cantina Chichilo de Buenos Aires</p>
         <p>Camarones 1901 esquina Terrero 2006</p>
         <p>(1416) Capital Federal - República Argentina</p>
@@ -96,14 +132,19 @@
         <p>Email: <a href="mailto:chichilo3554@hotmail.com">chichilo3554@hotmail.com</a></p>
         <p><a href="http://fotos.ubbi.com/MisFotos/galeria.asp?idAlbum=34165">Visite nuestro álbum de fotos</a></p>
     </div>
+
+    <!-- Mapa -->
+    <div class="map">
+        <iframe src="https://maps.google.com/maps?q=Camarones%201901%20esquina%20Terrero%202006,%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
+    </div>
 </div>
 
 <footer>
-    <p>ABIERTO de Jueves a Sábados de Noche</p>
-    <p>Sábados y Domingos Almuerzos</p>
     <p>&copy; 1956 - 2021 Cantina Chichilo. Todos los derechos reservados.</p>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
