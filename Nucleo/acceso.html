@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detección de Caras con face-api.js</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@latest/dist/face-api.min.js"></script>
+    <style>
+        #video {
+            position: relative;
+            width: 720px;
+            height: 560px;
+        }
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Detección de Caras</h1>
+    <video id="video" autoplay muted></video>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        async function loadModels() {
+            // Carga los modelos necesarios
+            await faceapi.nets.ssdMobilenetv1.loadFromUri('/models');
+            await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
+            await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+        }
+
+        async function startVideo() {
+            // Inicia la cámara web
+            const video = document.getElementById('video');
+            navigator.mediaDevices.getUserMedia({ video: {} })
+                .then((stream) => {
+                    video.srcObject = stream;
+                })
+                .catch((err) => console.error("Error al iniciar la cámara: ", err));
+        }
+
+        async function loadLabeledImages() {
+            // Carga las imágenes etiquetadas para cada persona
+            const labels = ['Persona1', 'Persona2']; // Nombres de personas que quieres identificar
+            return Promise.all(
+                labels.map(async (label) => {
+                    const descriptions = [];
+                    for (let i = 1; i <= 3; i++) { // Tres imágenes por persona
+                        const img = await faceapi.fetchImage(`/labeled_images/${label}/${i}.jpg`);
+                        const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+                        descriptions.push(detections.descriptor);
+                    }
+                    return new faceapi.LabeledFaceDescriptors(label, descriptions);
+                })
+            );
+        }
+
+        async function recognizeFaces() {
+            const labeledFaceDescriptors = await loadLabeledImages();
+            const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
+
+            video.addEventListener('play', async () => {
+                const canvas = document.getElementById('canvas');
+                const displaySize = { width: video.width, height: video.height };
+                faceapi.matchDimensions(canvas, displaySize);
+
+                setInterval(async () => {
+                    const detections = await faceapi.detectAllFaces(video)
+                        .withFaceLandmarks()
+                        .withFaceDescriptors();
+                    const resizedDetections = faceapi.resizeResults(detections, displaySize);
+                    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+
+                    resizedDetections.forEach((detection) => {
+                        const bestMatch = faceMatcher.findBestMatch(detection.descriptor);
+                        const text = bestMatch.toString();
+
+                        // Acción según la persona detectada
+                        if (bestMatch.label === 'Persona1') {
+                            console.log('Persona1 detectada');
+                        } else if (bestMatch.label === 'Persona2') {
+                            console.log('Persona2 detectada');
+                        } else {
+                            console.log('Persona desconocida detectada');
+                        }
+
+                        // Dibuja el marco y la etiqueta en la cara detectada
+                        const box = detection.detection.box;
+                        const drawBox = new faceapi.draw.DrawBox(box, { label: text });
+                        drawBox.draw(canvas);
+                    });
+                }, 100);
+            });
+        }
+
+        loadModels().then(startVideo).then(recognizeFaces);
+    </script>
+</body>
+</html>
