@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lectura de Datos Seriales en el Navegador</title>
+</head>
+<body>
+    <h1>Lectura de Datos Seriales</h1>
+
+    <!-- Entrada para especificar la velocidad en baudios -->
+    <label for="baudRate">Baudios:</label>
+    <input type="number" id="baudRate" value="9600" min="1" step="1">
+
+    <!-- Casilla de verificación para activar/desactivar saltos de línea -->
+    <label for="newline">Agregar saltos de línea:</label>
+    <input type="checkbox" id="newline" checked>
+
+    <!-- Entrada para especificar el límite de líneas en la salida -->
+    <label for="lineLimit">Límite de líneas a mostrar:</label>
+    <input type="number" id="lineLimit" value="10" min="1" step="1">
+
+    <button id="connectBtn">Conectar al Puerto Serial</button>
+    <button id="pauseBtn" disabled>Pausar</button>
+    <pre id="output" style="border: 1px solid #ddd; padding: 10px; height: 200px; overflow-y: scroll;"></pre>
+
+    <script>
+        const connectBtn = document.getElementById("connectBtn");
+        const pauseBtn = document.getElementById("pauseBtn");
+        const output = document.getElementById("output");
+        const baudRateInput = document.getElementById("baudRate");
+        const newlineCheckbox = document.getElementById("newline");
+        const lineLimitInput = document.getElementById("lineLimit");
+
+        let port, reader;
+        let isPaused = false;
+        let lines = [];
+
+        connectBtn.addEventListener("click", async () => {
+            // Verificar si la Web Serial API está disponible
+            if ("serial" in navigator) {
+                try {
+                    // Obtener el valor de baudios y el límite de líneas
+                    const baudRate = parseInt(baudRateInput.value, 10);
+                    const lineLimit = parseInt(lineLimitInput.value, 10);
+
+                    // Solicitar acceso al puerto serial y abrirlo
+                    port = await navigator.serial.requestPort();
+                    await port.open({ baudRate });
+
+                    const decoder = new TextDecoderStream();
+                    const inputDone = port.readable.pipeTo(decoder.writable);
+                    const inputStream = decoder.readable;
+                    reader = inputStream.getReader();
+
+                    output.textContent += "Conectado a " + baudRate + " baudios. Esperando datos...\n";
+                    pauseBtn.disabled = false; // Habilitar el botón de pausa
+
+                    // Leer los datos del puerto serial
+                    while (true) {
+                        if (isPaused) {
+                            await new Promise(resolve => setTimeout(resolve, 100)); // Pausar temporalmente la lectura
+                            continue;
+                        }
+
+                        const { value, done } = await reader.read();
+                        if (done) break; // Terminar si no hay más datos
+
+                        // Agregar el valor al arreglo de líneas y manejar saltos de línea
+                        if (newlineCheckbox.checked) {
+                            lines.push(value + "\n");
+                        } else {
+                            lines.push(value);
+                        }
+
+                        // Mantener solo las últimas `lineLimit` líneas
+                        if (lines.length > lineLimit) {
+                            lines.shift(); // Eliminar la línea más antigua
+                        }
+
+                        // Actualizar la salida con las últimas líneas
+                        output.textContent = lines.join("");
+                    }
+                    
+                    reader.releaseLock();
+                } catch (error) {
+                    output.textContent += "Error al abrir el puerto serial: " + error + "\n";
+                }
+            } else {
+                output.textContent = "La Web Serial API no es compatible con este navegador.";
+            }
+        });
+
+        // Botón de pausa y reanudación
+        pauseBtn.addEventListener("click", () => {
+            isPaused = !isPaused; // Cambiar el estado de pausa
+            pauseBtn.textContent = isPaused ? "Continuar" : "Pausar";
+        });
+    </script>
+</body>
+</html>
