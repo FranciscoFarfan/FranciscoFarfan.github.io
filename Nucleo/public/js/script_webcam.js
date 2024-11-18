@@ -28,7 +28,7 @@ async function loadLabeledImages() {
         labels.map(async (label) => {
             const descriptions = [];
             for (let i = 1; i <= 3; i++) { // Usa 3 imágenes por persona
-                const img = await faceapi.fetchImage(`Nucleo/labeled_images/${label}/${i}.jpg`);
+                const img = await faceapi.fetchImage(`/Nucleo/labeled_images/${label}/${i}.jpg`);
                 const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
                 descriptions.push(detections.descriptor);
             }
