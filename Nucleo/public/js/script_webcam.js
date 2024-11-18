@@ -7,7 +7,7 @@ const canvas = document.getElementById('overlay');
     video.srcObject = stream;
 
     // Cargar modelos de detección facial
-    const MODEL_URL = '/public/models';
+    const MODEL_URL = 'Nucleo/public/models';
     await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
     await faceapi.loadFaceLandmarkModel(MODEL_URL);
     await faceapi.loadFaceRecognitionModel(MODEL_URL);
@@ -28,7 +28,7 @@ async function loadLabeledImages() {
         labels.map(async (label) => {
             const descriptions = [];
             for (let i = 1; i <= 3; i++) { // Usa 3 imágenes por persona
-                const img = await faceapi.fetchImage(`/labeled_images/${label}/${i}.jpg`);
+                const img = await faceapi.fetchImage(`Nucleo/labeled_images/${label}/${i}.jpg`);
                 const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
                 descriptions.push(detections.descriptor);
             }

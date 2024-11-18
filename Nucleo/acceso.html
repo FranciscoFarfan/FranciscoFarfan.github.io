@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detección de Caras con face-api.js</title>
-    <script defer src="./public/js/script_webcam.js"></script>
+    <script defer src="Nucleo/public/js/script_webcam.js"></script>
     <style>
         #video {
             position: relative;
@@ -49,7 +49,7 @@
                 labels.map(async (label) => {
                     const descriptions = [];
                     for (let i = 1; i <= 3; i++) { // Tres imágenes por persona
-                        const img = await faceapi.fetchImage(`/labeled_images/${label}/${i}.jpg`);
+                        const img = await faceapi.fetchImage(`Nucleo//labeled_images/${label}/${i}.jpg`);
                         const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
                         descriptions.push(detections.descriptor);
                     }
