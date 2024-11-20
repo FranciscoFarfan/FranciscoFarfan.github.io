@@ -3,8 +3,10 @@ const canvas = document.getElementById('overlay');
 
 // Definir faceMatcher en un ámbito global
 let faceMatcher;
-console.log('Version 3');
- let contador=0;
+let contador = 0;
+
+console.log('Version 4');
+
 (async () => {
     try {
         // Iniciar la cámara
@@ -30,12 +32,10 @@ console.log('Version 3');
         console.log('FaceMatcher inicializado');
 
         // Iniciar detección en tiempo real con un intervalo
-        video.addEventListener('loadedmetadata', () => {
-            if (faceMatcher) {
-                console.log('Iniciando detección en tiempo real...');
-                setInterval(onPlay, 1000); // Ejecutar onPlay cada 1000ms (1 segundo)
-            }
-        });
+        if (faceMatcher) {
+            console.log('Iniciando detección en tiempo real...');
+            setInterval(onPlay, 1000); // Ejecutar onPlay cada 1000ms (1 segundo)
+        }
     } catch (error) {
         console.error('Error durante la inicialización:', error);
     }
@@ -56,7 +56,6 @@ async function loadLabeledImages() {
                 console.log(`Persona detectada correctamente: ${label}/${i}.jpg`);
                 descriptions.push(detections.descriptor);
             }
-            
             return new faceapi.LabeledFaceDescriptors(label, descriptions);
         })
     );
@@ -64,8 +63,9 @@ async function loadLabeledImages() {
 
 // Función principal de detección en tiempo real
 async function onPlay() {
-    console.log('Ejecucion :' + contador);
+    console.log('Ejecución :' + contador);
     contador++;
+
     if (!faceMatcher) {
         console.warn('FaceMatcher aún no está inicializado.');
         return;
