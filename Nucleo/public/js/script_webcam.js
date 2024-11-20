@@ -3,7 +3,7 @@ const canvas = document.getElementById('overlay');
 
 // Definir faceMatcher en un ámbito global
 let faceMatcher;
-console.log('Version 2');
+console.log('Version 3');
  let contador=0;
 (async () => {
     try {
@@ -64,7 +64,7 @@ async function loadLabeledImages() {
 
 // Función principal de detección en tiempo real
 async function onPlay() {
-    console.log('Ejecucion'+ contador);
+    console.log('Ejecucion :' + contador);
     contador++;
     if (!faceMatcher) {
         console.warn('FaceMatcher aún no está inicializado.');
