@@ -1,6 +1,9 @@
 const video = document.getElementById('inputVideo');
 const canvas = document.getElementById('overlay');
 
+// Definir faceMatcher en un ámbito global
+let faceMatcher;
+
 (async () => {
     // Iniciar la cámara
     const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
@@ -15,7 +18,7 @@ const canvas = document.getElementById('overlay');
 
     // Cargar imágenes etiquetadas para reconocimiento
     const labeledFaceDescriptors = await loadLabeledImages();
-    const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
+    faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
 
     // Iniciar detección en video
     onPlay();
@@ -23,7 +26,7 @@ const canvas = document.getElementById('overlay');
 
 // Función para cargar imágenes etiquetadas de cada persona
 async function loadLabeledImages() {
-    const labels = ['Andrea','Yo']; // Nombres de personas
+    const labels = ['Andrea', 'Yo']; // Nombres de personas
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
@@ -69,7 +72,7 @@ async function onPlay() {
         if (bestMatch.label === 'Andrea') {
             console.log('Acción para Andrea');
         } else if (bestMatch.label === 'Yo') {
-            console.log('accion para mi');
+            console.log('Acción para mí');
         } else {
             console.log('Persona desconocida');
         }
