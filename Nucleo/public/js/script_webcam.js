@@ -27,8 +27,13 @@ let faceMatcher;
 
         console.log('FaceMatcher inicializado');
 
-        // Iniciar detección en video cuando el video esté listo
-        video.addEventListener('loadedmetadata', onPlay);
+        // Iniciar detección en tiempo real con un intervalo
+        video.addEventListener('loadedmetadata', () => {
+            if (faceMatcher) {
+                console.log('Iniciando detección en tiempo real...');
+                setInterval(onPlay, 1000); // Ejecutar onPlay cada 1000ms (1 segundo)
+            }
+        });
     } catch (error) {
         console.error('Error durante la inicialización:', error);
     }
@@ -61,7 +66,8 @@ async function onPlay() {
     }
 
     if (video.paused || video.ended) {
-        return setTimeout(() => onPlay(), 100);
+        console.warn('El video no está activo.');
+        return;
     }
 
     const fullFaceDescriptions = await faceapi
@@ -98,6 +104,4 @@ async function onPlay() {
             console.log('Persona desconocida');
         }
     });
-
-    requestAnimationFrame(onPlay);
 }
