@@ -23,7 +23,7 @@ const canvas = document.getElementById('overlay');
 
 // Función para cargar imágenes etiquetadas de cada persona
 async function loadLabeledImages() {
-    const labels = ['Andrea']; // Nombres de personas
+    const labels = ['Andrea','Yo']; // Nombres de personas
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
@@ -66,10 +66,10 @@ async function onPlay() {
         drawBox.draw(canvas);
 
         // Acciones según la persona identificada
-        if (bestMatch.label === 'Persona1') {
-            console.log('Acción para Persona1');
-        } else if (bestMatch.label === 'Persona2') {
-            console.log('Acción para Persona2');
+        if (bestMatch.label === 'Andrea') {
+            console.log('Acción para Andrea');
+        } else if (bestMatch.label === 'Yo') {
+            console.log('accion para mi');
         } else {
             console.log('Persona desconocida');
         }
