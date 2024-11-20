@@ -3,12 +3,14 @@ const canvas = document.getElementById('overlay');
 
 // Definir faceMatcher en un ámbito global
 let faceMatcher;
-
+console.log('Version 2');
+ let contador;
 (async () => {
     try {
         // Iniciar la cámara
         const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
         video.srcObject = stream;
+        console.log('Camara iniciada');
 
         // Cargar modelos de detección facial
         const MODEL_URL = './models';
@@ -51,8 +53,10 @@ async function loadLabeledImages() {
                 if (!detections) {
                     throw new Error(`No se detectó ningún rostro en la imagen: ${label}/${i}.jpg`);
                 }
+                console.log('persona ${label}/${i} detectada correctamente ');
                 descriptions.push(detections.descriptor);
             }
+            
             return new faceapi.LabeledFaceDescriptors(label, descriptions);
         })
     );
@@ -60,6 +64,8 @@ async function loadLabeledImages() {
 
 // Función principal de detección en tiempo real
 async function onPlay() {
+    console.log('Ejecucion'+ contador);
+    contador++;
     if (!faceMatcher) {
         console.warn('FaceMatcher aún no está inicializado.');
         return;
