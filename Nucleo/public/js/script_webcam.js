@@ -5,23 +5,33 @@ const canvas = document.getElementById('overlay');
 let faceMatcher;
 
 (async () => {
-    // Iniciar la cámara
-    const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
-    video.srcObject = stream;
+    try {
+        // Iniciar la cámara
+        const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+        video.srcObject = stream;
 
-    // Cargar modelos de detección facial
-    const MODEL_URL = './models';
-    await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
-    await faceapi.loadFaceLandmarkModel(MODEL_URL);
-    await faceapi.loadFaceRecognitionModel(MODEL_URL);
-    await faceapi.loadFaceExpressionModel(MODEL_URL);
+        // Cargar modelos de detección facial
+        const MODEL_URL = './models';
+        await Promise.all([
+            faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
+            faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+            faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+            faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+        ]);
 
-    // Cargar imágenes etiquetadas para reconocimiento
-    const labeledFaceDescriptors = await loadLabeledImages();
-    faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
+        console.log('Modelos cargados exitosamente');
 
-    // Iniciar detección en video
-    onPlay();
+        // Cargar imágenes etiquetadas para reconocimiento
+        const labeledFaceDescriptors = await loadLabeledImages();
+        faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
+
+        console.log('FaceMatcher inicializado');
+
+        // Iniciar detección en video cuando el video esté listo
+        video.addEventListener('loadedmetadata', onPlay);
+    } catch (error) {
+        console.error('Error durante la inicialización:', error);
+    }
 })();
 
 // Función para cargar imágenes etiquetadas de cada persona
@@ -33,6 +43,9 @@ async function loadLabeledImages() {
             for (let i = 1; i <= 3; i++) { // Usa 3 imágenes por persona
                 const img = await faceapi.fetchImage(`/Nucleo/labeled_images/${label}/${i}.jpg`);
                 const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+                if (!detections) {
+                    throw new Error(`No se detectó ningún rostro en la imagen: ${label}/${i}.jpg`);
+                }
                 descriptions.push(detections.descriptor);
             }
             return new faceapi.LabeledFaceDescriptors(label, descriptions);
@@ -42,9 +55,17 @@ async function loadLabeledImages() {
 
 // Función principal de detección en tiempo real
 async function onPlay() {
-    if (video.paused || video.ended) return setTimeout(() => onPlay());
+    if (!faceMatcher) {
+        console.warn('FaceMatcher aún no está inicializado.');
+        return;
+    }
 
-    const fullFaceDescriptions = await faceapi.detectAllFaces(video)
+    if (video.paused || video.ended) {
+        return setTimeout(() => onPlay(), 100);
+    }
+
+    const fullFaceDescriptions = await faceapi
+        .detectAllFaces(video)
         .withFaceLandmarks()
         .withFaceDescriptors()
         .withFaceExpressions();
