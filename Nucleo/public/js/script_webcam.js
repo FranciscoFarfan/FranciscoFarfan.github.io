@@ -23,7 +23,7 @@ const canvas = document.getElementById('overlay');
 
 // Función para cargar imágenes etiquetadas de cada persona
 async function loadLabeledImages() {
-    const labels = ['Persona1', 'Persona2']; // Nombres de personas
+    const labels = ['Andrea']; // Nombres de personas
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
