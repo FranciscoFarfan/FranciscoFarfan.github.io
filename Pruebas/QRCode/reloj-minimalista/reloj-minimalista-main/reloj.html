@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj y Clima</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #333;
+            color: white;
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+        }
+        .info-box {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        #clock {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        #weather {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #weather-icon {
+            width: 100px; /* Ajusta el tamaño del icono según lo necesites */
+            margin-right: 5px;
+        }
+        #extra-info {
+            font-size: 20px;
+        }
+    </style>
+    <link rel="icon" type="image/png" id="favicon" href="default_icon.png"> <!-- Icono predeterminado -->
+</head>
+<body>
+    <div class="info-box">
+        <div id="clock">Cargando hora...</div>
+        <div id="weather">Cargando clima...</div>
+        <div id="extra-info"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function getBackgroundImage(condition, isDay) {
+            if (condition.includes('rain')) {
+                return isDay ? 'img/day_rain.jpg' : 'img/night_rain.jpg';
+            } else if (condition.includes('clear')) {
+                return isDay ? 'img/day_clear.jpg' : 'img/night_clear.jpg';
+            } else if (condition.includes('cloud')) {
+                return isDay ? 'img/day_cloudy.jpg' : 'img/night_cloudy.jpg';
+            } else if (condition.includes('snow')) {
+                return isDay ? 'img/day_snow.jpg' : 'img/night_snow.jpg';
+            } else if (condition.includes('thunderstorm')) {
+                return isDay ? 'img/day_thunderstorm.jpg' : 'img/night_thunderstorm.jpg';
+            } else if (condition.includes('fog') || condition.includes('mist')) {
+                return isDay ? 'img/day_fog.jpg' : 'img/night_fog.jpg';
+            }
+            // Default condition
+            return isDay ? 'img/day_clear.jpg' : 'img/night_clear.jpg';
+        }
+
+        async function updateWeather() {
+            const apiKey = 'f185361bbb5545d684220908241406'; // Reemplaza 'TU_API_KEY' con tu clave API de WeatherAPI
+            const city = 'San Luis Potosi';
+            const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&lang=es`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud del clima: ' + response.statusText);
+                }
+                const data = await response.json();
+                const temp = data.current.temp_c;
+                const description = data.current.condition.text.toLowerCase();
+                const isDay = data.current.is_day === 1;
+                const feelsLike = data.current.feelslike_c;
+                const humidity = data.current.humidity;
+                const windSpeed = data.current.wind_kph;
+                const windDir = data.current.wind_dir;
+                const uvIndex = data.current.uv;
+                const pressure = data.current.pressure_mb;
+                const cloud = data.current.cloud;
+                const precip = data.current.precip_mm;
+                const lastUpdated = data.current.last_updated;
+                const iconUrl = 'https:' + data.current.condition.icon; // URL completo del icono
+
+                // Actualizar texto y mostrar icono del clima
+                document.getElementById('weather').innerHTML = `
+                    <img id="weather-icon" src="${iconUrl}" alt="${description}"> 
+                    <span>Clima en ${city}: ${temp}°C, ${description}</span>
+                `;
+                document.getElementById('extra-info').innerHTML = `
+                    <p>Sensación térmica: ${feelsLike}°C</p>
+                    <p>Humedad: ${humidity}%</p>
+                    <p>Viento: ${windSpeed} kph desde ${windDir}</p>
+                    <p>Índice UV: ${uvIndex}</p>
+                    <p>Presión: ${pressure} mb</p>
+                    <p>Nubosidad: ${cloud}%</p>
+                    <p>Precipitación: ${precip} mm</p>
+                `;
+
+                // Cambiar imagen de fondo basado en el clima y la hora del día
+                const bgImage = getBackgroundImage(description, isDay);
+                document.body.style.backgroundImage = `url('${bgImage}')`;
+
+                // Cambiar el ícono de la pestaña del navegador
+                const favicon = document.getElementById('favicon');
+                favicon.href = iconUrl;
+            } catch (error) {
+                console.error('Error obteniendo el clima:', error);
+                document.getElementById('weather').textContent = 'No se pudo obtener el clima';
+            }
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+        updateWeather();
+        setInterval(updateWeather, 60000);  // Actualizar clima cada 60 segundos
+    </script>
+</body>
+</html>
