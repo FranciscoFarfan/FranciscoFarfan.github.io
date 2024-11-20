@@ -4,7 +4,7 @@ const canvas = document.getElementById('overlay');
 // Definir faceMatcher en un ámbito global
 let faceMatcher;
 console.log('Version 2');
- let contador;
+ let contador=0;
 (async () => {
     try {
         // Iniciar la cámara
@@ -53,7 +53,7 @@ async function loadLabeledImages() {
                 if (!detections) {
                     throw new Error(`No se detectó ningún rostro en la imagen: ${label}/${i}.jpg`);
                 }
-                console.log('persona ${label}/${i} detectada correctamente ');
+                console.log(`Persona detectada correctamente: ${label}/${i}.jpg`);
                 descriptions.push(detections.descriptor);
             }
             
