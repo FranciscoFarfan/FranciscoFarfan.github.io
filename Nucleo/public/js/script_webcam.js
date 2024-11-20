@@ -7,7 +7,7 @@ const canvas = document.getElementById('overlay');
     video.srcObject = stream;
 
     // Cargar modelos de detección facial
-    const MODEL_URL = '/public/models';
+    const MODEL_URL = './models';
     await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
     await faceapi.loadFaceLandmarkModel(MODEL_URL);
     await faceapi.loadFaceRecognitionModel(MODEL_URL);
