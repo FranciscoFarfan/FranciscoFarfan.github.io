@@ -5,7 +5,7 @@ const canvas = document.getElementById('overlay');
 let faceMatcher;
 let contador = 0;
 
-console.log('Version 4');
+console.log('Version 6');
 
 (async () => {
     try {
@@ -43,23 +43,36 @@ console.log('Version 4');
 
 // Función para cargar imágenes etiquetadas de cada persona
 async function loadLabeledImages() {
-    const labels = ['Andrea', 'Yo']; // Nombres de personas
+    const labels = ['Andrea', 'Farfan','Cesar','Max','Rodrigo','Daniel']; // Nombres de personas
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
             for (let i = 1; i <= 3; i++) { // Usa 3 imágenes por persona
-                const img = await faceapi.fetchImage(`/Nucleo/labeled_images/${label}/${i}.jpg`);
+                let img;
+                try {
+                    // Intenta cargar la imagen en formato .jpg
+                    img = await faceapi.fetchImage(`/Nucleo/labeled_images/${label}/${i}.jpg`);
+                } catch (e1) {
+                    try {
+                        // Si falla, intenta cargar la imagen en formato .jfif
+                        img = await faceapi.fetchImage(`/Nucleo/labeled_images/${label}/${i}.jfif`);
+                    } catch (e2) {
+                        throw new Error(`No se pudo cargar la imagen: ${label}/${i} en formatos .jpg o .jfif`);
+                    }
+                }
+                
                 const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
                 if (!detections) {
-                    throw new Error(`No se detectó ningún rostro en la imagen: ${label}/${i}.jpg`);
+                    throw new Error(`No se detectó ningún rostro en la imagen: ${label}/${i}`);
                 }
-                console.log(`Persona detectada correctamente: ${label}/${i}.jpg`);
+                console.log(`Persona detectada correctamente: ${label}/${i}`);
                 descriptions.push(detections.descriptor);
             }
             return new faceapi.LabeledFaceDescriptors(label, descriptions);
         })
     );
 }
+
 
 // Función principal de detección en tiempo real
 async function onPlay() {
@@ -103,11 +116,20 @@ async function onPlay() {
 
         // Acciones según la persona identificada
         if (bestMatch.label === 'Andrea') {
-            console.log('Acción para Andrea');
-        } else if (bestMatch.label === 'Yo') {
-            console.log('Acción para mí');
-        } else {
-            console.log('Persona desconocida');
+            document.getElementById('mensaje').textContent = 'Bienvenida Andrea';
+        } else if (bestMatch.label === 'Farfan') {
+            document.getElementById('mensaje').textContent = 'Bienvenido Farfan';
+        } else if (bestMatch.label === 'Daniel') {
+            document.getElementById('mensaje').textContent = 'Bienvenido Daniel';
+        } else if (bestMatch.label === 'Rodrigo') {
+            document.getElementById('mensaje').textContent = 'Bienvenido Rodrigo';
+        } else if (bestMatch.label === 'Max') {
+            document.getElementById('mensaje').textContent = 'Bienvenido Max';
+        } else if (bestMatch.label === 'Cesar') {
+            document.getElementById('mensaje').textContent = 'Bienvenido Cesar';
+        } else{
+            document.getElementById('mensaje').textContent = 'Colocate frente a la camara para pasar el control de acceso';
         }
+        
     });
 }
