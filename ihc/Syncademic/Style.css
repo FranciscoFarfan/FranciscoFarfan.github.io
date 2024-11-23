@@ -220,7 +220,7 @@ body {
 }
 
 .scrollable {
-    height: 75%;
+    height: 60%;
     overflow: scroll;
 }
 
