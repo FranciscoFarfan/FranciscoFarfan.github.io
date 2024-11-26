@@ -18,7 +18,7 @@
         </div>
         <nav class="menuppal">
             <ul>
-                <li><a href="https://franciscofarfan.github.io/ihc/Syncademic/Interfaz.html">Inicio</a></li>
+                <li><a href="Interfaz.html">Inicio</a></li>
               <li><a href="AgregarGrupo.html">Grupos</a></li>
               <li><a href="AgregarCompañero.html">Compañeros</a></li>
               <li><a href="Agregar.html" class="task-btn">Tareas</a></li>
@@ -88,7 +88,7 @@
                 <input type="search" id="miBusqueda" name="buscar" placeholder="000000">
                 <div class="actions">
                     
-                    <button style="margin-left: 94%;">Buscar</button>
+                    <button style="margin-left: 94%;" onclick="buscarMate()">Buscar</button>
                 </div>
                 
                 <hr class="separador">
@@ -123,6 +123,29 @@
         </div>
         </div>
 
+        <script>
+            function buscarMate() {
+                const inputBusqueda = document.getElementById('miBusqueda').value.trim();
+        
+                if (inputBusqueda === "") {
+                    alert("El campo está vacío. Por favor, escribe la clave de la persona.");
+                    return; 
+                }
+        
+                const nuevoBoton = document.createElement('button');
+                nuevoBoton.textContent = inputBusqueda;
+                nuevoBoton.onclick = function () {
+                    alert(`Acción para el compañero: ${inputBusqueda}`);
+                };
+        
+                const scrollableDivCompaneros = document.querySelector('.groups:nth-of-type(2) .scrollable');
+        
+               scrollableDivCompaneros.appendChild(nuevoBoton);
+        
+                alert(`Se añadió a: ${inputBusqueda} como compañero.`);
+            }
+        </script>
+
         <!-- Barra derecha: Tareas -->
         
         <div class="tasks-sidebar">
@@ -148,4 +171,11 @@
         </div>
     </div>
 </body>
+<style>
+    @media screen and (max-width: 950px) {
+    .tasks-sidebar {
+        display: none; 
+    }
+}
+</style>
 </html>

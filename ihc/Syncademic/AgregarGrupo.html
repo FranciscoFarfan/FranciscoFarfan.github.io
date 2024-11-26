@@ -18,7 +18,7 @@
         </div>
         <nav class="menuppal">
             <ul>
-                <li><a href="https://franciscofarfan.github.io/ihc/Syncademic/Interfaz.html">Inicio</a></li>
+                <li><a href="Interfaz.html">Inicio</a></li>
               <li><a href="AgregarGrupo.html">Grupos</a></li>
               <li><a href="AgregarCompañero.html">Compañeros</a></li>
               <li><a href="Agregar.html" class="task-btn">Tareas</a></li>
@@ -70,9 +70,7 @@
                     <button>Víctor Zamarrón</button>
                     <button>Coral Domínguez</button>
                     <button>César Rodríguez</button>
-                    <button>Víctor Zamarrón</button>
-                    <button>Coral Domínguez</button>
-                    <button>César Rodríguez</button>
+                    <button>David Vidales</button>
                 </div>
                 <div class="add">
                     <button onclick="window.location.href='AgregarCompañero.html';">Buscar compañeros</button>
@@ -88,7 +86,7 @@
                 <input type="search" id="miBusqueda" name="buscar" placeholder="Clave de la clase">
                 <div class="actions">
                     
-                    <button style="margin-left: 94%;">Buscar</button>
+                    <button style="margin-left: 94%;" onclick="buscarGrupo()">Buscar</button>
                 </div>
                 
                 <hr class="separador">
@@ -123,6 +121,28 @@
         </div>
         </div>
 
+        <script>
+            function buscarGrupo() {
+                const inputBusqueda = document.getElementById('miBusqueda').value.trim();
+        
+                if (inputBusqueda === "") {
+                    alert("El campo está vacío. Por favor, escribe la clave de la clase.");
+                    return;
+                }
+        
+                const nuevoBoton = document.createElement('button');
+                nuevoBoton.textContent = inputBusqueda;
+                nuevoBoton.onclick = function () {
+                    alert(`Acción para el grupo: ${inputBusqueda}`);
+                };
+        
+                const scrollableDiv = document.querySelector('.scrollable');
+                scrollableDiv.appendChild(nuevoBoton);
+        
+                alert(`Se te añadió al grupo: ${inputBusqueda}`);
+            }
+        </script>
+
         <!-- Barra derecha: Tareas -->
         <div class="tasks-sidebar">
             <h3>Tareas</h3>
@@ -147,4 +167,12 @@
         </div>
     </div>
 </body>
+<style>
+    @media screen and (max-width: 950px) {
+    .tasks-sidebar {
+        display: none; 
+    }
+}
+</style>
+
 </html>

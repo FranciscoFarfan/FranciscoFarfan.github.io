@@ -18,7 +18,7 @@
         </div>
         <nav class="menuppal">
             <ul>
-                <li><a href="https://franciscofarfan.github.io/ihc/Syncademic/Interfaz.html">Inicio</a></li>
+                <li><a href="Interfaz.html">Inicio</a></li>
               <li><a href="AgregarGrupo.html">Grupos</a></li>
               <li><a href="AgregarCompañero.html">Compañeros</a></li>
               <li><a href="Agregar.html" class="task-btn">Tareas</a></li>
@@ -87,9 +87,17 @@
                 </div>
                 <p>Descripción de la publicación o tarea. Aquí puede ir cualquier texto adicional que describa la publicación.</p>
                 <div class="actions">
-                    <button>Comentar</button>
-                    <button>Agregar a mis tareas</button>
+                    <button onclick="com1()">Comentar</button>
+                    <button onclick="tarea1()">Agregar a mis tareas</button>
                 </div>
+                <p id="com1"></p>
+                <script>
+                    function com1 (){
+                    document.getElementById('com1').innerHTML = `
+                        <div class="files">Escribe tu comentario</div>
+                    `;
+                }
+                </script>    
             </div>
 
             <div class="card">
@@ -102,9 +110,17 @@
                 </div>
                 <p>Descripción de la publicación o tarea. Aquí puede ir cualquier texto adicional que describa la publicación.</p>
                 <div class="actions">
-                    <button>Comentar</button>
-                    <button>Agregar a mis tareas</button>
+                    <button onclick="com2()">Comentar</button>
+                    <button onclick="tarea2()">Agregar a mis tareas</button>
                 </div>
+                <p id="com2"></p>
+                <script>
+                    function com2 (){
+                    document.getElementById('com2').innerHTML = `
+                        <div class="files">Escribe tu comentario</div>
+                    `;
+                }
+                </script>  
             </div>
 
             <div class="card">
@@ -117,9 +133,17 @@
                 </div>
                 <p>Descripción de la publicación o tarea. Aquí puede ir cualquier texto adicional que describa la publicación.</p>
                 <div class="actions">
-                    <button>Comentar</button>
-                    <button>Agregar a mis tareas</button>
+                    <button  onclick="com3()">Comentar</button>
+                    <button onclick="tarea3()">Agregar a mis tareas</button>
                 </div>
+                <p id="com3"></p>
+                <script>
+                    function com3 (){
+                    document.getElementById('com3').innerHTML = `
+                        <div class="files">Escribe tu comentario</div>
+                    `;
+                }
+                </script>  
             </div>
         </div>
 
@@ -138,6 +162,39 @@
                 <input type="checkbox" id="tarea3">
                 <label for="tarea3">Tarea 3</label>
             </div>
+            <p id="task1"></p>
+            <p id="task2"></p>
+            <p id="task3"></p>
+            <script>
+                function tarea1 (){
+                    document.getElementById('task1').innerHTML = `
+                        <div class='task'>
+                            <input type="checkbox" id="tarea4">
+                            <label for="tarea4">Make an essay</label>
+                        </div>
+                    `;
+                }
+
+                function tarea2 (){
+                    document.getElementById('task2').innerHTML = `
+                        <div class='task'>
+                            <input type="checkbox" id="tarea4">
+                            <label for="tarea4">terminar matriz</label>
+                        </div>
+                    `;
+                }
+
+                function tarea3 (){
+                    document.getElementById('task3').innerHTML = `
+                        <div class='task'>
+                            <input type="checkbox" id="tarea4">
+                            <label for="tarea4">investigar algo</label>
+                        </div>
+                    `;
+                }
+
+                
+            </script>
             <div class="add">
                 <button onclick="window.location.href='Agregar.html';">Crear nueva tarea</button>
             </div>

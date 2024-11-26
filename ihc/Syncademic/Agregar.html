@@ -18,7 +18,7 @@
         </div>
         <nav class="menuppal">
             <ul>
-                <li><a href="https://franciscofarfan.github.io/ihc/Syncademic/Interfaz.html">Inicio</a></li>
+                <li><a href="Interfaz.html">Inicio</a></li>
               <li><a href="AgregarGrupo.html">Grupos</a></li>
               <li><a href="AgregarCompañero.html">Compañeros</a></li>
               <li><a href="Agregar.html" class="task-btn">Tareas</a></li>
@@ -81,10 +81,10 @@
                 <h1>Publicar Tarea</h1>
                 <h3>Tipo:</h3>
                     <select id="miSelect" name="opciones">
-                        <option value="opcion1">Opción 1</option>
-                        <option value="opcion2">Opción 2</option>
-                        <option value="opcion3">Opción 3</option>
-                        <option value="opcion4">Opción 4</option>
+                        <option value="Tarea">Tarea </option>
+                        <option value="Proyecto">Proyecto</option>
+                        <option value="Investigar">Investigar</option>
+                        <option value="Otra tarea">Otra tarea</option>
                     </select>
                     <h3>Grupo: </h3>
                     <select id="miSelect" name="opciones">
@@ -104,7 +104,7 @@
                 <input type="date" id="miCalendario" name="fecha">
                 <div class="actions">
                     
-                    <button style="margin-left: 94%;">Publicar</button>
+                    <button style="margin-left: 94%;" onclick="tareaN()">Publicar</button>
                 </div>
             </div>
 
@@ -118,6 +118,7 @@
         </style>
         <div class="tasks-sidebar">
             <h3>Tareas</h3>
+            <div class="scrollable">
             <div class="task">
                 <input type="checkbox" id="tarea1">
                 <label for="tarea1">Tarea 1</label>
@@ -129,6 +130,23 @@
             <div class="task">
                 <input type="checkbox" id="tarea3">
                 <label for="tarea3">Tarea 3</label>
+            </div>
+
+            <p id="taskN"></p>
+            <script>
+                function tareaN() {
+                    let tipoTarea = document.getElementsByName('opciones')[0].value;
+
+                    let nuevaTarea = `
+                        <div class='task'>
+                            <input type="checkbox" id="${tipoTarea}">
+                            <label for="${tipoTarea}">${tipoTarea}</label>
+                        </div>
+                    `;
+
+                    document.getElementById("taskN").innerHTML += nuevaTarea;
+                }
+            </script>
             </div>
             <div class="add">
                 <button onclick="window.location.href='Interfaz.html';">Cerrar</button>
