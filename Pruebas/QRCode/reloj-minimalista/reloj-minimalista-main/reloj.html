@@ -63,17 +63,17 @@
         }
 
         function getBackgroundImage(condition, isDay) {
-            if (condition.text.includes('rain')) {
+            if (condition.includes('rain')) {
                 return isDay ? 'img/day_rain.jpg' : 'img/night_rain.jpg';
-            } else if (condition.text.includes('clear')) {
+            } else if (condition.includes('clear')) {
                 return isDay ? 'img/day_clear.jpg' : 'img/night_clear.jpg';
-            } else if (condition.text.includes('cloud')) {
+            } else if (condition.includes('cloud')) {
                 return isDay ? 'img/day_cloudy.jpg' : 'img/night_cloudy.jpg';
-            } else if (condition.text.includes('snow')) {
+            } else if (condition.includes('snow')) {
                 return isDay ? 'img/day_snow.jpg' : 'img/night_snow.jpg';
-            } else if (condition.text.includes('thunderstorm')) {
+            } else if (condition.includes('thunderstorm')) {
                 return isDay ? 'img/day_thunderstorm.jpg' : 'img/night_thunderstorm.jpg';
-            } else if (condition.text.includes('fog') || condition.includes('mist')) {
+            } else if (condition.includes('fog') || condition.includes('mist')) {
                 return isDay ? 'img/day_fog.jpg' : 'img/night_fog.jpg';
             }
             // Default condition
