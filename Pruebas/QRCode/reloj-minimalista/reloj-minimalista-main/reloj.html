@@ -63,7 +63,6 @@
         }
 
         function getBackgroundImage(condition, isDay) {
-            console.log(condition);
             if (condition.includes('rain')) {
                 console.log('rain');
                 return isDay ? 'img/day_rain.jpg' : 'img/night_rain.jpg';
@@ -83,6 +82,7 @@
                 console.log('fog');
                 return isDay ? 'img/day_fog.jpg' : 'img/night_fog.jpg';
             }
+            return isDay ? 'img/day_fog.jpg' : 'img/night_fog.jpg';
         }
 
         async function updateWeather() {
