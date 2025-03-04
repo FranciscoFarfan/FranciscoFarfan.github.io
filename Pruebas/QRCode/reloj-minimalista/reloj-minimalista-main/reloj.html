@@ -63,13 +63,15 @@
         }
 
         function getBackgroundImage(condition, isDay) {
+            condition = condition.toLowerCase(); // Convertir a minúsculas
+        
             if (condition.includes('rain')) {
                 console.log('rain');
                 return isDay ? 'img/day_rain.jpg' : 'img/night_rain.jpg';
             } else if (condition.includes('clear')) {
                 console.log('clear');
                 return isDay ? 'img/day_clear.jpg' : 'img/night_clear.jpg';
-            } else if (condition.includes('cloud')) {
+            } else if (condition.includes('cloud') || condition.includes('cloudy')) {  // Ahora cubre tanto 'cloud' como 'cloudy'
                 console.log('cloud');
                 return isDay ? 'img/day_cloudy.jpg' : 'img/night_cloudy.jpg';
             } else if (condition.includes('snow')) {
@@ -84,6 +86,7 @@
             }
             return isDay ? 'img/day_fog.jpg' : 'img/night_fog.jpg';
         }
+
 
         async function updateWeather() {
             const apiKey = 'f185361bbb5545d684220908241406'; // Reemplaza 'TU_API_KEY' con tu clave API de WeatherAPI
