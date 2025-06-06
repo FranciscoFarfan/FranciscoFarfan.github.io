@@ -8,17 +8,14 @@
 <body>
     <h1>Lectura de Datos Seriales</h1>
 
-    <!-- Entrada para especificar la velocidad en baudios -->
     <label for="baudRate">Baudios:</label>
-    <input type="number" id="baudRate" value="9600" min="1" step="1">
+    <input type="number" id="baudRate" value="115200" min="1" step="1">
 
-    <!-- Casilla de verificación para activar/desactivar saltos de línea -->
     <label for="newline">Agregar saltos de línea:</label>
     <input type="checkbox" id="newline" checked>
 
-    <!-- Entrada para especificar el límite de líneas en la salida -->
     <label for="lineLimit">Límite de líneas a mostrar:</label>
-    <input type="number" id="lineLimit" value="10" min="1" step="1">
+    <input type="number" id="lineLimit" value="100" min="1" step="1">
 
     <button id="connectBtn">Conectar al Puerto Serial</button>
     <button id="pauseBtn" disabled>Pausar</button>
@@ -36,52 +33,64 @@
         let isPaused = false;
         let lines = [];
 
+        class LineBreakTransformer {
+            constructor() {
+                this.chunks = "";
+            }
+
+            transform(chunk, controller) {
+                this.chunks += chunk;
+                const parts = this.chunks.split("\n");
+                this.chunks = parts.pop(); // Guarda la parte incompleta
+                parts.forEach(line => controller.enqueue(line));
+            }
+
+            flush(controller) {
+                if (this.chunks) {
+                    controller.enqueue(this.chunks);
+                }
+            }
+        }
+
         connectBtn.addEventListener("click", async () => {
-            // Verificar si la Web Serial API está disponible
             if ("serial" in navigator) {
                 try {
-                    // Obtener el valor de baudios y el límite de líneas
                     const baudRate = parseInt(baudRateInput.value, 10);
                     const lineLimit = parseInt(lineLimitInput.value, 10);
 
-                    // Solicitar acceso al puerto serial y abrirlo
                     port = await navigator.serial.requestPort();
                     await port.open({ baudRate });
 
-                    const decoder = new TextDecoderStream();
-                    const inputDone = port.readable.pipeTo(decoder.writable);
-                    const inputStream = decoder.readable;
-                    reader = inputStream.getReader();
+                    const textDecoder = new TextDecoderStream();
+                    const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+                    const lineStream = textDecoder.readable
+                        .pipeThrough(new TransformStream(new LineBreakTransformer()));
+
+                    reader = lineStream.getReader();
 
                     output.textContent += "Conectado a " + baudRate + " baudios. Esperando datos...\n";
-                    pauseBtn.disabled = false; // Habilitar el botón de pausa
+                    pauseBtn.disabled = false;
 
-                    // Leer los datos del puerto serial
                     while (true) {
                         if (isPaused) {
-                            await new Promise(resolve => setTimeout(resolve, 100)); // Pausar temporalmente la lectura
+                            await new Promise(resolve => setTimeout(resolve, 100));
                             continue;
                         }
 
                         const { value, done } = await reader.read();
-                        if (done) break; // Terminar si no hay más datos
+                        if (done) break;
 
-                        // Agregar el valor al arreglo de líneas y manejar saltos de línea
-                        if (newlineCheckbox.checked) {
-                            lines.push(value + "\n");
-                        } else {
-                            lines.push(value);
+                        if (value !== undefined) {
+                            lines.push(newlineCheckbox.checked ? value + "\n" : value);
+
+                            if (lines.length > lineLimit) {
+                                lines.shift();
+                            }
+
+                            output.textContent = lines.join("");
                         }
-
-                        // Mantener solo las últimas `lineLimit` líneas
-                        if (lines.length > lineLimit) {
-                            lines.shift(); // Eliminar la línea más antigua
-                        }
-
-                        // Actualizar la salida con las últimas líneas
-                        output.textContent = lines.join("");
                     }
-                    
+
                     reader.releaseLock();
                 } catch (error) {
                     output.textContent += "Error al abrir el puerto serial: " + error + "\n";
@@ -91,9 +100,8 @@
             }
         });
 
-        // Botón de pausa y reanudación
         pauseBtn.addEventListener("click", () => {
-            isPaused = !isPaused; // Cambiar el estado de pausa
+            isPaused = !isPaused;
             pauseBtn.textContent = isPaused ? "Continuar" : "Pausar";
         });
     </script>
