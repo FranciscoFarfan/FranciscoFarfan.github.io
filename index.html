@@ -6,61 +6,686 @@
     <title>Mi Portafolio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+<script type="module" src="scripts.js"></script>
+
 <body>
     <header>
         <h1>Mi Portafolio</h1>
-        <p>Soy un estudiante de la carrera de ingenieria en tecnologias de la información, con conocimientos en HTML, CSS, JavaScript, PHP, MySQL, Java, C, y trabajo con placas Arduino y ESP32.</p>
+        <sl-details summary="Acerca de mi">
+        Soy un estudiante de la carrera de ingenieria en tecnologias de la información 
+        </sl-details>
     </header>
+    <sl-tab-group>
+    <sl-tab slot="nav" panel="conocimientos">Conocimientos</sl-tab>
+    <sl-tab slot="nav" panel="proyectos">Proyectos</sl-tab>
+    <sl-tab slot="nav" panel="certificados">Certificados</sl-tab>
+ 
+    <sl-tab-panel name="conocimientos">
+        <section style="padding-left:20px; padding-right: 20px;">
+            <sl-details summary="Criterios de nivel">
+                <div class="descripcion-nivel">
+                    <sl-rating precision="0.5" readonly value="0" ></sl-rating>
+                    <p>He escuchado acerca de, pero no conozco nada</p>
+                </div>
+                <div class="descripcion-nivel">
+                    <sl-rating precision="0.5" readonly value="1" ></sl-rating>
+                    <p>Alguna vez lo he usado y quiero aprender mas</p>
+                </div>
+                <div class="descripcion-nivel">
+                    <sl-rating precision="0.5" readonly value="2" ></sl-rating>
+                    <p>Me he dedicado a aprender, pero puedo mejorar</p>
+                </div>
+                <div class="descripcion-nivel">
+                    <sl-rating precision="0.5" readonly value="3" ></sl-rating>
+                    <p>Me desempeño bien</p>
+                </div>
+                <div class="descripcion-nivel">
+                    <sl-rating precision="0.5" readonly value="4" ></sl-rating>
+                    <p>Puedo hacer todo lo que se requiera sin problemas</p>
+                </div>
+                <div class="descripcion-nivel">
+                    <sl-rating precision="0.5" readonly value="5" ></sl-rating>
+                    <p>Soy la excelencia en ese tema</p>
+                </div>
+            </sl-details>
+            <br>
+            <div class="divisor-primario">
+                <br>
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>WEB</strong><sl-button id="btn-cweb"size="small" pill onclick="">Mostrar</sl-button>
+                </div>
+                <sl-divider style="--color: rgb(70, 146, 245);"></sl-divider>
+            </div>
+            <section  id="conocimientos-cweb" style="display: none; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <div class="divisor-secundario">
+                    <br>
+                    Backend
+                    <sl-divider style="--color: rgb(129, 130, 131);"></sl-divider>
+                </div>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>HTML</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Lenguaje basico para la creación y estructuración de paginas web
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>Java Script</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Lenguaje escencial para la creación de paginas dinamicas y funcionales
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>mySQL</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Gestor de base de datos SQL, muy utilizado para paginas web
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="3"></sl-rating>
+                </sl-card>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>PHP</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Lenguaje del lado del servidor, expande las funciones que una pagina puede tener, asi como crear servicios complejos
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
 
-    <section class="projects">
-        <h2>Mis Proyectos</h2>
-        <br>
-        <div class="project-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/1200px-GitHub_Invertocat_Logo.svg.png" alt="Proyecto 1">
-            <h3>Mi perfil en GitHub</h3>
-            <p>Ojo, algunos proyectos podrian no estar completos aun.</p>
-            <a href="https://github.com/FranciscoFarfan" target="_blank">Ver perfil</a>
-        </div>
-        
-        <div class="project-card">
-            <img src="QR.jpg" alt="Proyecto 1">
-            <h3>Lector decodigo QR</h3>
-            <p>Deberia de leer codigos QR con la camara o subiendo una imagen.</p>
-            <a href="https://franciscofarfan.github.io/Pruebas/QRCode/QR1.html" target="_blank">Ver proyecto</a>
-        </div>
+                <div class="divisor-secundario">
+                    <br>
+                    Frontend
+                    <sl-divider style="--color: rgb(129, 130, 131);"></sl-divider>
+                </div>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>CSS</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Lenguaje para manejar el apartado visual de las paginas web
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="3"></sl-rating>
+                </sl-card>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>Bootstrap</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Framework que facilita la creación de páginas responsivas y fáciles de adaptar a diferentes dispositivos
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="3"></sl-rating>
+                </sl-card>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>Shoelace</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Es una colección de elementos HTML personalizados, diseñados para ser reutilizables y fáciles de usar en cualquier proyecto web
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+                <div class="divisor-secundario">
+                    <br>
+                    Herramientas
+                    <sl-divider style="--color: rgb(129, 130, 131);"></sl-divider>
+                </div>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>API´s</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Interfazes que permiten la comunicación con distintos servicios
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="2.5"></sl-rating>
+                </sl-card>
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>WordPress</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Es una plataforma de gestión de contenidos que permite crear y gestionar paginas web, blogs y tiendas en linea
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="2.5"></sl-rating>
+                </sl-card>
+                
+            </section>    
 
-        <div class="project-card">
-            <img src="SerialMonitor.jpg" alt="Proyecto 1">
-            <h3>Lector Serial WEB</h3>
-            <p>Deberia de mostrarte la comunicacion serial que quieras (principalmente para placas arduino).</p>
-            <a href="https://franciscofarfan.github.io/Pruebas/QRCode/SerialLector.html" target="_blank">Ver proyecto</a>
-        </div>
+            <div class="divisor-primario">
+                <br>
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>Lenguajes</strong><sl-button id="btn-lenguajes"size="small" pill onclick="">Mostrar</sl-button>
+                </div>
+                <sl-divider style="--color: rgb(70, 146, 245);"></sl-divider>
+            </div>
+            <section id="conocimientos-lenguajes" style="display: none; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <sl-card class="card">
+                    <div slot="header">
+                        <strong>C</strong>
+                        <sl-icon-button name="code-square" ></sl-icon-button>
+                    </div>
+                    Lenguaje de programación de alto nivel, ampliamente utilizado para el desarrollo de software de sistemas, sistemas operativos y aplicaciones de alto rendimiento
+                    <br>
+                    <strong>Nivel:</strong>
+                    <sl-rating precision="0.5" readonly value="3"></sl-rating>
+                </sl-card>
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>C#</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje moderno y orientado a objetos, ampliamente usado en desarrollo de aplicaciones de escritorio, web y videojuegos con .NET.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="2"></sl-rating>
+                </sl-card>
 
-        <div class="project-card">
-            <img src="HCI.jpg" alt="Proyecto 2">
-            <h3>Interacción segundo parcial</h3>
-            <p>Proyecto de la materia interacción humano computadora (interfaz de usuario).</p>
-            <a href="/ihc/Syncademic/Interfaz.html" target="_blank">Ver proyecto</a>
-        </div>
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Java</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje de propósito general, robusto y multiplataforma, muy utilizado en aplicaciones empresariales, móviles y sistemas grandes.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
 
-        <div class="project-card">
-            <img src="NG4.jpg" alt="Proyecto 2">
-            <h3>Guardianes del vecindario</h3>
-            <p>Proyecto de nucleo 4: creatividad (detector facial).</p>
-            <a href="/Nucleo/webcam.html" target="_blank">Ver proyecto</a>
-        </div>
-        <div class="project-card">
-            <img src="Reloj.jpg" alt="Proyecto 2">
-            <h3>Reloj Minimalista</h3>
-            <p>Deberia mostrarte la hora (Reutilización de tablets y celulares viejos).</p>
-            <a href="https://franciscofarfan.github.io/Pruebas/QRCode/reloj-minimalista/reloj-minimalista-main/reloj.html" target="_blank">Ver proyecto</a>
-        </div>
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Python</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje de alto nivel, versátil y fácil de aprender, utilizado en desarrollo web, automatización, ciencia de datos e inteligencia artificial.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
 
-        <!-- Agregar más tarjetas según sea necesario -->
-    </section>
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>R</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje especializado en análisis estadístico y visualización de datos, muy utilizado en ciencia de datos e investigación.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="1"></sl-rating>
+                </sl-card>
 
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Lua</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje de scripting ligero, rápido y embebible, común en videojuegos y sistemas embebidos.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="1"></sl-rating>
+                </sl-card>
+            
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Rust</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje de sistemas centrado en seguridad y rendimiento, ideal para aplicaciones críticas y desarrollo de software sin errores de memoria.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="0.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Ruby</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje elegante y expresivo, conocido por su simplicidad y uso en el desarrollo web con frameworks como Ruby on Rails.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="1"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Go</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje creado por Google, eficiente y sencillo, ideal para servicios web, backend y sistemas concurrentes.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="0.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Visual Basic</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje de programación orientado a eventos, enfocado en desarrollo rápido de aplicaciones con interfaz gráfica en entornos Windows.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="2"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Kotlin</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Lenguaje moderno y conciso, interoperable con Java, y recomendado oficialmente por Google para desarrollo Android.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="1"></sl-rating>
+                </sl-card>
+
+            </section>
+
+            <div class="divisor-primario">
+                <br>
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>Sistemas operativos</strong><sl-button id="btn-sistemas"size="small" pill onclick="">Mostrar</sl-button>
+                </div>
+                <sl-divider style="--color: rgb(70, 146, 245);"></sl-divider>
+            </div>
+            <section id="conocimientos-sistemas" style="display: none; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Windows</strong>
+                    <sl-icon-button name="laptop"></sl-icon-button>
+                </div>
+                Sistema operativo gráfico ampliamente utilizado, ideal para usuarios generales, productividad y juegos. Predominante en entornos empresariales.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Linux (CLI)</strong>
+                    <sl-icon-button name="terminal"></sl-icon-button>
+                </div>
+                Interfaz de línea de comandos de Linux, poderosa y flexible. Ideal para administración de sistemas, programación avanzada y servidores.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Ubuntu</strong>
+                    <sl-icon-button name="laptop"></sl-icon-button>
+                </div>
+                Distribución popular de Linux basada en Debian, orientada a usuarios de escritorio, con buen soporte y facilidad de uso.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>macOS</strong>
+                    <sl-icon-button name="apple"></sl-icon-button>
+                </div>
+                Sistema operativo de Apple para Mac, enfocado en diseño, estabilidad y experiencia fluida, ampliamente usado en entornos creativos.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value=""></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Android</strong>
+                    <sl-icon-button name="android2"></sl-icon-button>
+                </div>
+                Sistema operativo móvil basado en Linux, muy personalizable y el más usado a nivel mundial. Popular para desarrollo de apps móviles.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>iOS</strong>
+                    <sl-icon-button name="apple"></sl-icon-button>
+                </div>
+                Sistema operativo de Apple para iPhone y iPad, conocido por su seguridad, optimización y ecosistema cerrado.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value=""></sl-rating>
+                </sl-card>
+                    
+            </section>
+
+            <div class="divisor-primario">
+                <br>
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>Herramientas de programación</strong><sl-button id="btn-hprog"size="small" pill onclick="">Mostrar</sl-button>
+                </div>
+                <sl-divider style="--color: rgb(70, 146, 245);"></sl-divider>
+            </div>
+            <section id="conocimientos-hprog" style="display: none; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Visual Studio Code</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Editor de código fuente ligero pero potente, con soporte para múltiples lenguajes y extensiones para facilitar el desarrollo.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>NetBeans</strong>
+                    <sl-icon-button name="code-square"></sl-icon-button>
+                </div>
+                Entorno de desarrollo integrado (IDE) para Java y otros lenguajes, que facilita la programación, depuración y gestión de proyectos.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Unity</strong>
+                    <sl-icon-button name="controller"></sl-icon-button>
+                </div>
+                Motor de desarrollo multiplataforma para la creación de videojuegos y experiencias interactivas en 2D y 3D.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="2.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Flet</strong>
+                    <sl-icon-button name="layers"></sl-icon-button>
+                </div>
+                Framework para construir interfaces web y aplicaciones de escritorio de manera sencilla y rápida usando Python.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Hostinger</strong>
+                    <sl-icon-button name="cloud-upload"></sl-icon-button>
+                </div>
+                Servicio de hosting web con soporte para múltiples tecnologías, panel de control intuitivo y opciones de alojamiento escalables.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>GitHub</strong>
+                    <sl-icon-button name="github"></sl-icon-button>
+                </div>
+                Plataforma para control de versiones y colaboración, muy utilizada para gestionar proyectos y compartir código fuente.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Arduino IDE</strong>
+                    <sl-icon-button name="cpu"></sl-icon-button>
+                </div>
+                Entorno de desarrollo simplificado para programar placas Arduino y ESP, ideal para proyectos de electrónica y prototipos.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Dev-C++</strong>
+                    <sl-icon-button name="code"></sl-icon-button>
+                </div>
+                IDE clásico para desarrollo en C y C++, ligero y fácil de usar, con compilador integrado para crear aplicaciones nativas.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+            </section>
+
+            <div class="divisor-primario">
+                <br>
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>Herramientas de edición</strong><sl-button id="btn-hedit"size="small" pill onclick="">Mostrar</sl-button>
+                </div>
+                <sl-divider style="--color: rgb(70, 146, 245);"></sl-divider>
+            </div>
+            <section id="conocimientos-hedit" style="display: none; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Audacity</strong>
+                    <sl-icon-button name="music-note"></sl-icon-button>
+                </div>
+                Editor de audio gratuito y de código abierto, ideal para grabación, edición y mezcla de sonido.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Photoshop</strong>
+                    <sl-icon-button name="image"></sl-icon-button>
+                </div>
+                Software profesional para edición y retoque fotográfico, creación de gráficos y diseño digital.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="2.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Filmora</strong>
+                    <sl-icon-button name="film"></sl-icon-button>
+                </div>
+                Editor de video intuitivo para crear y editar videos con efectos, transiciones y música.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Blender</strong>
+                    <sl-icon-button name="pentagon"></sl-icon-button>
+                </div>
+                Software libre para modelado 3D, animación, simulación y renderizado profesional.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="1.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Word</strong>
+                    <sl-icon-button name="file-text"></sl-icon-button>
+                </div>
+                Procesador de textos popular para creación de documentos, cartas, informes y más.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Excel</strong>
+                    <sl-icon-button name="table"></sl-icon-button>
+                </div>
+                Herramienta para hojas de cálculo, análisis de datos y creación de gráficos dinámicos.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>PowerPoint</strong>
+                    <sl-icon-button name="easel3"></sl-icon-button>
+                </div>
+                Software para crear presentaciones visuales con diapositivas, texto, imágenes y animaciones.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>CorelDRAW</strong>
+                    <sl-icon-button name="vector-pen"></sl-icon-button>
+                </div>
+                Programa profesional de diseño gráfico vectorial para ilustración, diseño de logotipos y publicaciones.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Canva</strong>
+                    <sl-icon-button name="paint-bucket"></sl-icon-button>
+                </div>
+                Herramienta en línea para diseño gráfico fácil y rápido, con plantillas para redes sociales, posters y más.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+
+            </section>
+
+            <div class="divisor-primario">
+                <br>
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>Otros</strong><sl-button id="btn-otros"size="small" pill onclick="">Mostrar</sl-button>
+                </div>
+                <sl-divider style="--color: rgb(70, 146, 245);"></sl-divider>
+            </div>
+            <section id="conocimientos-otros" style="display: none; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Desarrollo en ESP32</strong>
+                    <sl-icon-button name="cpu"></sl-icon-button>
+                </div>
+                Programación y desarrollo de proyectos con el microcontrolador ESP32, ideal para IoT, sensores y dispositivos conectados.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Docker</strong>
+                    <sl-icon-button name="inboxes"></sl-icon-button>
+                </div>
+                Plataforma para crear, desplegar y gestionar aplicaciones en contenedores, facilitando la portabilidad y escalabilidad.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Nextcloud</strong>
+                    <sl-icon-button name="cloud"></sl-icon-button>
+                </div>
+                Plataforma de nube privada para almacenamiento, colaboración y sincronización de archivos de forma segura.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Microsoft 365</strong>
+                    <sl-icon-button name="microsoft"></sl-icon-button>
+                </div>
+                Suite integral que incluye Word, Excel, PowerPoint, Outlook, Teams y otros servicios para productividad empresarial y personal.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="4"></sl-rating>
+                </sl-card>
+
+                <sl-card class="card">
+                <div slot="header">
+                    <strong>Google Workspace</strong>
+                    <sl-icon-button name="google"></sl-icon-button>
+                </div>
+                Conjunto de herramientas colaborativas en la nube de Google, como Gmail, Drive, Docs, Sheets, Meet y Calendar.
+                <br>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3.5"></sl-rating>
+                </sl-card>
+
+            </section>
+
+        </section>  
+    </sl-tab-panel>
+    <sl-tab-panel name="proyectos">
+        <section>  
+            <sl-card class="card">
+                <img
+                    slot="image"
+                    src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
+                    alt="A kitten sits patiently between a terracotta pot and decorative grasses."
+                />
+
+                <strong>Mittens</strong><br />
+                This kitten is as cute as he is playful. Bring him home today!<br />
+                <small>6 weeks old</small>
+
+                <div slot="footer">
+                    <sl-button variant="primary" pill>Visitar</sl-button>
+                    <sl-tag size="medium">Proyecto web</sl-tag>
+                </div>
+            </sl-card>
+            
+        </section>        
+    </sl-tab-panel>
+    <sl-tab-panel name="certificados">
+        <section>  
+            <sl-card class="card">
+                <div slot="header">
+                    <strong>cisco</strong>
+                    <sl-icon-button name="code-square" ></sl-icon-button>
+                </div>
+                <strong>Nivel:</strong>
+                <sl-rating precision="0.5" readonly value="3"></sl-rating>
+            </sl-card>
+        </section>        
+    </sl-tab-panel>
+
+  
     <footer>
-        <p>© 2024 Mi Nombre</p>
+        <p>© 2025 :)</p>
     </footer>
 </body>
 </html>
