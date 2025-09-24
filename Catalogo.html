@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Catálogo de Servicios — Soporte Técnico</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --accent:#0ea5a3; /* teal-ish */
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,var(--bg),#071225);color:#e6eef6;line-height:1.45}
+    .container{max-width:1100px;margin:36px auto;padding:24px}
+
+    header{display:flex;align-items:center;gap:18px;margin-bottom:22px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#1dd4c9);display:grid;place-items:center;color:#042029;font-weight:700;font-size:20px}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:14px}
+
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:20px}
+    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg,var(--card),rgba(10,16,26,0.7));padding:18px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .section-title h2{font-size:16px;margin:0}
+    .services{display:grid;gap:10px}
+
+    .service{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)}
+    .service b{display:block}
+    .service .desc{color:var(--muted);font-size:13px}
+    .price{font-weight:700;color:var(--accent);min-width:92px;text-align:right}
+
+    ul.list{padding-left:18px;margin:8px 0;color:var(--muted)}
+
+    .full-width{grid-column:1/-1}
+    .highlight{background:linear-gradient(90deg, rgba(14,165,163,0.08), rgba(29,212,201,0.06));padding:12px;border-radius:10px;border:1px dashed rgba(14,165,163,0.08);color:var(--muted)}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .buttons{display:flex;gap:8px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:inherit;text-decoration:none;font-size:13px}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#1fd2c7);color:#042029;border:0}
+
+    /* Price table inside cards */
+    .price-grid{display:grid;grid-template-columns:1fr 120px;gap:8px}
+    .small{font-size:13px;color:var(--muted)}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo"><img src="Catalogo/medio logo sin fondo.png" style="width: 60px;"></div>
+      <div>
+        <h1>Servicios de Soporte y Reparación</h1>
+        <p class="lead">Catálogo rápido de servicios </p>
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <section class="card">
+        <div class="section-title">
+          <h2>🔧 Diagnóstico y revisión</h2>
+          <span class="small">Servicios básicos</span>
+        </div>
+        <div class="services">
+          <div class="service"><div><b>Diagnóstico general</b><div class="desc">Revisión inicial del equipo</div></div><div class="price">$50</div></div>
+          <div class="service"><div><b>Revisión con informe técnico</b><div class="desc">Informe detallado y recomendaciones</div></div><div class="price">$150</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <h2>🧼 Mantenimiento y limpieza</h2>
+          <span class="small">Físico y software</span>
+        </div>
+
+        <div class="services">
+          <div class="service"><div><b>Computadora y consola</b><div class="desc">Limpieza interna (con aire) + externa (incluye periféricos)</div></div><div class="price">$200</div></div>
+          <div class="service"><div><b>Laptop</b><div class="desc">Limpieza interna y externa</div></div><div class="price">$150</div></div>
+          <div class="service"><div><b>Celular</b><div class="desc">Limpieza y revisión</div></div><div class="price">$150</div></div>
+
+          <div style="margin-top:6px" class="highlight">
+            <div class="small"><b>Mantenimiento completo</b> — limpieza interna/externa + optimización</div>
+            <ul class="list">
+              <li>Computadora y consola (incluye periféricos): <b>$400</b></li>
+              <li>Mando de consola: <b>$100</b></li>
+              <li>Laptop: <b>$350</b></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <h2>💻 Formateo y sistemas operativos</h2>
+          <span class="small">Respaldos e instalaciones</span>
+        </div>
+
+        <div class="services">
+          <div class="service"><div><b>Formateo con respaldo</b><div class="desc">Incluye copia de seguridad según tamaño</div></div><div class="price">Ver tabla</div></div>
+          <div class="service" style="padding-top:4px;padding-bottom:4px">
+            <div class="price-grid small">
+              <div>5 Gb de respaldo</div><div style="text-align:right">$100</div>
+              <div>20 Gb de respaldo</div><div style="text-align:right">$150</div>
+              <div>120 Gb de respaldo</div><div style="text-align:right">$200</div>
+              <div>1 Tb de respaldo</div><div style="text-align:right">$400</div>
+            </div>
+          </div>
+
+          <div class="service"><div><b>Instalación de sistema operativo</b><div class="desc">Con o sin licencia</div></div><div class="price">$50</div></div>
+          <div class="service small"><div>Windows (con licencia)</div><div class="price">$50 + licencia</div></div>
+          <div class="service small"><div>Windows (sin licencia)</div><div class="price">$50</div></div>
+          <div class="service small"><div>Linux (Ubuntu, ElementaryOS)</div><div class="price">$50</div></div>
+
+          <div class="service"><div><b>Configuración inicial de equipo nuevo</b><div class="desc">Con recomendaciones y asesoria</div></div><div class="price">$100</div></div>
+          <div style="margin-top:8px" class="highlight small">
+            <b>Servidor personal / CasaOS</b>
+            <ul class="list">
+              <li>Servidor de archivos (Nextcloud): <b>$500</b></li>
+              <li>Servidor de fotos (Immich): <b>$200</b></li>
+              <li>Servidor multimedia (Jellyfin): <b>$100</b></li>
+            </ul>
+            
+          </div>
+
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <h2>🛠️ Reparación y armado de hardware</h2>
+          <span class="small">Laptops · Consolas · PC</span>
+        </div>
+
+        <div class="services">
+          <div class="service"><div><b>Actualización de componentes (Laptop)</b><div class="desc">Mano de obra + precio del componente</div></div><div class="price">$100 + componente</div></div>
+          <div class="service"><div><b>Sustitución (teclado, pantalla...)</b><div class="desc">Reparación estándar</div></div><div class="price">$150–$400 + componente</div></div>
+          <div class="service"><div><b>Reparación avanzada</b><div class="desc">Placa base, soldadura</div></div><div class="price">$500–$4,000</div></div>
+
+          <div class="service" style="margin-top:6px"><div><b>Consolas</b><div class="desc">Mejora de disco, reparación de mando</div></div><div class="price">Desde $100</div></div>
+
+          <div class="service"><div><b>PC — Armado total</b><div class="desc">Incluye asesoría de compra</div></div><div class="price">$400 + componentes</div></div>
+          <div class="service"><div><b>PC — Actualización de componentes</b><div class="desc">Mano de obra</div></div><div class="price">$50 + componente</div></div>
+        </div>
+        <p class="small" style="margin-top:10px">Los precios de reparación pueden variar segun la dificultad del proceso.</p>
+
+      </section>
+
+      <section class="card full-width">
+        <div class="section-title">
+          <h2>📁 Recuperación y transferencia de datos</h2>
+          <span class="small">Seguridad y respaldo</span>
+        </div>
+        <div class="services">
+          <div class="service"><div><b>Recuperación básica</b><div class="desc">Recuperación desde disco o sistema</div></div><div class="price">$300–$600</div></div>
+          <div class="service"><div><b>Transferencia entre equipos</b><div class="desc">Migración completa de datos</div></div><div class="price">$400–$550</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <h2>🏷️ Extras y promociones</h2>
+          <span class="small">Costos adicionales</span>
+        </div>
+        <div class="services">
+          <div class="service small"><div>Servicio a domicilio (unicamente fin de semana)</div><div class="price">+$100</div></div>
+          <div class="service small"><div>Bonificación de recomendación</div><div class="price">5% en trabajos &gt; $100</div></div>
+        </div>
+        <p class="small" style="margin-top:10px">Los cargos por envío de componentes corren a cuenta del cliente. ¹ ʸ ² Sujeto a disponibilidad.</p>
+      </section>
+
+    </div>
+
+    <footer>
+      <div class="small">Solicita tu servicio por medio de WhatsApp</div>
+      <div class="buttons">
+        <a class="btn primary" href="https://wa.me/524401817984"> <i class="fab fa-whatsapp"></i> Contactar</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
