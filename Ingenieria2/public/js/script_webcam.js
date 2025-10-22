@@ -51,11 +51,11 @@ async function loadLabeledImages() {
                 let img;
                 try {
                     // Intenta cargar la imagen en formato .jpg
-                    img = await faceapi.fetchImage(`/Nucleo/labeled_images/${label}/${i}.jpg`);
+                    img = await faceapi.fetchImage(`/Ingenieria2/labeled_images/${label}/${i}.jpg`);
                 } catch (e1) {
                     try {
                         // Si falla, intenta cargar la imagen en formato .jfif
-                        img = await faceapi.fetchImage(`/Nucleo/labeled_images/${label}/${i}.jfif`);
+                        img = await faceapi.fetchImage(`/Ingenieria2/labeled_images/${label}/${i}.jfif`);
                     } catch (e2) {
                         throw new Error(`No se pudo cargar la imagen: ${label}/${i} en formatos .jpg o .jfif`);
                     }

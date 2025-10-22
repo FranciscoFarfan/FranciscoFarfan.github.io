@@ -52,6 +52,7 @@ async function loadLabeledImages() {
                 try {
                     // Intenta cargar la imagen en formato .jpg
                     img = await faceapi.fetchImage(`/Nucleo/labeled_images/${label}/${i}.jpg`);
+                    console.log(`Persona: ${label}/${i}`)
                 } catch (e1) {
                     try {
                         // Si falla, intenta cargar la imagen en formato .jfif
