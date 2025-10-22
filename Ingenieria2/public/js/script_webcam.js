@@ -1,20 +1,17 @@
 const video = document.getElementById('inputVideo');
 const canvas = document.getElementById('overlay');
-
-// Definir faceMatcher en un ámbito global
 let faceMatcher;
 let contador = 0;
+let detectionInterval;
 
-console.log('Version 6');
+console.log('Versión 7');
 
 (async () => {
     try {
-        // Iniciar la cámara
         const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
         video.srcObject = stream;
-        console.log('Camara iniciada');
+        console.log('Cámara iniciada');
 
-        // Cargar modelos de detección facial
         const MODEL_URL = './models';
         await Promise.all([
             faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
@@ -25,46 +22,46 @@ console.log('Version 6');
 
         console.log('Modelos cargados exitosamente');
 
-        // Cargar imágenes etiquetadas para reconocimiento
         const labeledFaceDescriptors = await loadLabeledImages();
         faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
 
         console.log('FaceMatcher inicializado');
 
-        // Iniciar detección en tiempo real con un intervalo
         if (faceMatcher) {
             console.log('Iniciando detección en tiempo real...');
-            setInterval(onPlay, 1000); // Ejecutar onPlay cada 1000ms (1 segundo)
+            detectionInterval = setInterval(onPlay, 1000);
         }
     } catch (error) {
         console.error('Error durante la inicialización:', error);
     }
 })();
 
-// Función para cargar imágenes etiquetadas de cada persona
 async function loadLabeledImages() {
-    const labels = ['Farfan','Victor']; // Nombres de personas
+    const labels = ['Farfan', 'Victor'];
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
-            for (let i = 1; i <= 3; i++) { // Usa 3 imágenes por persona
+            for (let i = 1; i <= 3; i++) {
                 let img;
                 try {
-                    // Intenta cargar la imagen en formato .jpg
                     img = await faceapi.fetchImage(`/Ingenieria2/labeled_images/${label}/${i}.jpg`);
                 } catch (e1) {
                     try {
-                        // Si falla, intenta cargar la imagen en formato .jfif
                         img = await faceapi.fetchImage(`/Ingenieria2/labeled_images/${label}/${i}.jfif`);
                     } catch (e2) {
                         throw new Error(`No se pudo cargar la imagen: ${label}/${i} en formatos .jpg o .jfif`);
                     }
                 }
-                
-                const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+
+                const detections = await faceapi
+                    .detectSingleFace(img)
+                    .withFaceLandmarks()
+                    .withFaceDescriptor();
+
                 if (!detections) {
                     throw new Error(`No se detectó ningún rostro en la imagen: ${label}/${i}`);
                 }
+
                 console.log(`Persona detectada correctamente: ${label}/${i}`);
                 descriptions.push(detections.descriptor);
             }
@@ -73,12 +70,16 @@ async function loadLabeledImages() {
     );
 }
 
-
-// Función principal de detección en tiempo real
-// Función principal de detección en tiempo real
 async function onPlay() {
     console.log('Ejecución :' + contador);
     contador++;
+
+    if (contador >= 10) {
+        clearInterval(detectionInterval);
+        document.getElementById('mensaje').textContent = 'Ninguna coincidencia, acceso no concedido';
+        console.warn('Se alcanzó el límite de intentos. Detección detenida.');
+        return;
+    }
 
     if (!faceMatcher) {
         console.warn('FaceMatcher aún no está inicializado.');
@@ -99,28 +100,30 @@ async function onPlay() {
     const dims = faceapi.matchDimensions(canvas, video, true);
     const resizedResults = faceapi.resizeResults(fullFaceDescriptions, dims);
 
-    // Limpia el canvas y dibuja las detecciones
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawDetections(canvas, resizedResults);
     faceapi.draw.drawFaceLandmarks(canvas, resizedResults);
     faceapi.draw.drawFaceExpressions(canvas, resizedResults, 0.05);
 
-    // Identificar personas y ejecutar acciones específicas
+    let coincidenciaDetectada = false;
+
     resizedResults.forEach((result) => {
         const bestMatch = faceMatcher.findBestMatch(result.descriptor);
         const box = result.detection.box;
         const text = bestMatch.toString();
 
-        // Dibuja el nombre en el canvas
         const drawBox = new faceapi.draw.DrawBox(box, { label: text });
         drawBox.draw(canvas);
 
-        // Verifica si la distancia es menor o igual a 0.4 (90% de similitud)
         if (bestMatch.distance <= 0.4 && bestMatch.label !== 'unknown') {
+            coincidenciaDetectada = true;
             document.getElementById('mensaje').textContent = `Acceso concedido a ${bestMatch.label}`;
+            clearInterval(detectionInterval);
             window.location.href = 'https://franciscofarfan.github.io/Catalogo.html';
-        } else {
-            document.getElementById('mensaje').textContent = 'Colócate frente a la cámara para pasar el control de acceso';
         }
     });
+
+    if (!coincidenciaDetectada) {
+        document.getElementById('mensaje').textContent = 'Colócate frente a la cámara para pasar el control de acceso';
+    }
 }
