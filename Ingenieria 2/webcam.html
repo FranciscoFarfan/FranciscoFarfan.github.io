@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Control</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script defer src="./public/js/face-api.min.js"></script>
+
+    <style>
+         * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00bcd4;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        #mensaje {
+            color: #ff5722;
+        }
+
+        .video-container {
+            position: relative;
+            width: 80%;
+            height: 600px;
+            max-width: 600px;
+            aspect-ratio: 16/9;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 5px solid #00bcd4;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Control de acceso</h1>
+    <h2 id="mensaje">Esperando a la camara... </h2>
+
+    <div class="video-container" id="videoContainer">
+        <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+    </div>
+
+    <footer>
+        Powered by AI Recognition Technology
+    </footer>
+
+    <script src="./public/js/script_webcam.js"></script>
+</body>
+
+</html>

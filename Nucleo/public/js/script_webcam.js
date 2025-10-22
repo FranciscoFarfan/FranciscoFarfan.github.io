@@ -43,7 +43,7 @@ console.log('Version 6');
 
 // Función para cargar imágenes etiquetadas de cada persona
 async function loadLabeledImages() {
-    const labels = ['Farfan']; // Nombres de personas
+    const labels = ['Farfan','Victor']; // Nombres de personas
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
