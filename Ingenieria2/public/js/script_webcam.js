@@ -74,7 +74,7 @@ async function onPlay() {
     console.log('Ejecución :' + contador);
     contador++;
 
-    if (contador >= 10) {
+    if (contador >= 20) {
         clearInterval(detectionInterval);
         document.getElementById('mensaje').textContent = 'Ninguna coincidencia, acceso no concedido';
         console.warn('Se alcanzó el límite de intentos. Detección detenida.');
