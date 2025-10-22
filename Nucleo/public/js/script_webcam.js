@@ -43,7 +43,7 @@ console.log('Version 6');
 
 // Función para cargar imágenes etiquetadas de cada persona
 async function loadLabeledImages() {
-    const labels = ['Andrea', 'Farfan','Cesar','Max','Rodrigo','Daniel']; // Nombres de personas
+    const labels = ['Farfan']; // Nombres de personas
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
@@ -74,6 +74,7 @@ async function loadLabeledImages() {
 }
 
 
+// Función principal de detección en tiempo real
 // Función principal de detección en tiempo real
 async function onPlay() {
     console.log('Ejecución :' + contador);
@@ -114,22 +115,12 @@ async function onPlay() {
         const drawBox = new faceapi.draw.DrawBox(box, { label: text });
         drawBox.draw(canvas);
 
-        // Acciones según la persona identificada
-        if (bestMatch.label === 'Andrea') {
-            document.getElementById('mensaje').textContent = 'Bienvenida Andrea';
-        } else if (bestMatch.label === 'Farfan') {
-            document.getElementById('mensaje').textContent = 'Bienvenido Farfan';
-        } else if (bestMatch.label === 'Daniel') {
-            document.getElementById('mensaje').textContent = 'Bienvenido Daniel';
-        } else if (bestMatch.label === 'Rodrigo') {
-            document.getElementById('mensaje').textContent = 'Bienvenido Rodrigo';
-        } else if (bestMatch.label === 'Max') {
-            document.getElementById('mensaje').textContent = 'Bienvenido Max';
-        } else if (bestMatch.label === 'Cesar') {
-            document.getElementById('mensaje').textContent = 'Bienvenido Cesar';
-        } else{
-            document.getElementById('mensaje').textContent = 'Colocate frente a la camara para pasar el control de acceso';
+        // Verifica si la distancia es menor o igual a 0.4 (90% de similitud)
+        if (bestMatch.distance <= 0.4 && bestMatch.label !== 'unknown') {
+            document.getElementById('mensaje').textContent = `Acceso concedido a ${bestMatch.label}`;
+            window.location.href = 'https://franciscofarfan.github.io/Catalogo.html';
+        } else {
+            document.getElementById('mensaje').textContent = 'Colócate frente a la cámara para pasar el control de acceso';
         }
-        
     });
 }
